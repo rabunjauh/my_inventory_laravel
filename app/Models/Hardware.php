@@ -8,7 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Hardware extends Model
 {
     use HasFactory;
-
-    protected $guarded = ['id'];
-    
 }

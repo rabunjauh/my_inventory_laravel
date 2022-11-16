@@ -14,7 +14,10 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        return view('/supplier/index', [
+            "title" => "Supplier Data",
+            "suppliers" => Supplier::all()
+        ]);
     }
 
     /**
@@ -24,7 +27,9 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('/supplier/create', [
+            "title" => "Add Supplier"
+        ]);
     }
 
     /**
@@ -35,7 +40,14 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255|unique:suppliers'
+        ]);
+
+        $validatedData['name'] = ucwords($validatedData['name']);
+
+        Supplier::create($validatedData);
+        return redirect('/supplier')->with('success', 'Supplier data successfully added');
     }
 
     /**
@@ -57,7 +69,10 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        //
+        return view('/supplier/edit', [
+            "title" => "Edit Supplier",
+            "supplier" => $supplier
+        ]);
     }
 
     /**
@@ -69,7 +84,14 @@ class SupplierController extends Controller
      */
     public function update(Request $request, Supplier $supplier)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+
+        $validatedData['name'] = ucwords($validatedData['name']);
+
+        Supplier::where('id', $supplier->id)->update($validatedData);
+        return redirect('/supplier')->with('success', 'Supplier data successfully updated');
     }
 
     /**
@@ -80,6 +102,7 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        //
+        Supplier::destroy($supplier->id);
+        return redirect('/supplier')->with('success', 'Supplier data successfully deleted');
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\HardwareCategoryController;
 use App\Http\Controllers\SoftwareCategoryController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\HardwareController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemsController;
@@ -25,3 +26,4 @@ use App\Http\Controllers\ItemsController;
 Route::resource('/hardwareCategory', HardwareCategoryController::class);
 Route::resource('/softwareCategory', SoftwareCategoryController::class);
 Route::resource('/project', ProjectController::class);
+Route::resource('/supplier', SupplierController::class);

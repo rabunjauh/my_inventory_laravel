@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('suppliers', function (Blueprint $table) {
+        Schema::create('processors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('model_no');
+            $table->tinyInteger('manufacturer_id');
+            $table->tinyInteger('core');
+            $table->string('frequency');
+            $table->string('memory_support');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suppliers');
+        Schema::dropIfExists('processors');
     }
 };
