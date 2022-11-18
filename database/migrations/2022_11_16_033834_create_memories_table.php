@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('memories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('type');
             $table->string('module');
             $table->string('capacity');
             $table->tinyInteger('manufacturer_id');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

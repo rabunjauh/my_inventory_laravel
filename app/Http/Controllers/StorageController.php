@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Manufacturer;
 use App\Models\Storage;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,10 @@ class StorageController extends Controller
      */
     public function index()
     {
-        //
+        return view('storage/index',[
+            "title" => "Storage Data",
+            "storages" => Storage::with(['manufacturer'])->get()
+        ]);
     }
 
     /**
@@ -24,7 +28,10 @@ class StorageController extends Controller
      */
     public function create()
     {
-        //
+        return view('storage/create', [
+            "title" => "Add Storage",
+            "manufacturers" => Manufacturer::all()
+        ]);
     }
 
     /**
@@ -35,7 +42,18 @@ class StorageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'size' => 'required|max:255',
+            'capacity' => 'required|max:255',
+            'manufacturer_id' => 'required',
+            'technology' => 'required|max:255',
+            'type' =>  'required|max:255'
+        ]);
+        $validatedData['capacity'] = ucwords($validatedData['capacity']);
+        $validatedData['technology'] = ucwords($validatedData['technology']);
+
+        Storage::create($validatedData);
+        return redirect('/storage')->with('success', 'Storage data successfully added');
     }
 
     /**
@@ -57,7 +75,11 @@ class StorageController extends Controller
      */
     public function edit(Storage $storage)
     {
-        //
+        return view('storage/edit', [
+            "title" => "Edit Storage",
+            "manufacturers" =>  Manufacturer::all(),
+            "storage" => $storage
+        ]);
     }
 
     /**
@@ -69,7 +91,18 @@ class StorageController extends Controller
      */
     public function update(Request $request, Storage $storage)
     {
-        //
+        $validatedData = $request->validate([
+            'size' => 'required|max:255',
+            'capacity' => 'required|max:255',
+            'manufacturer_id' => 'required',
+            'technology' => 'required|max:255',
+            'type' =>  'required|max:255'
+        ]);
+        $validatedData['capacity'] = ucwords($validatedData['capacity']);
+        $validatedData['technology'] = ucwords($validatedData['technology']);
+
+        Storage::where('id', $storage->id)->update($validatedData);
+        return redirect('/storage')->with('success', 'Storage data successfully updated');
     }
 
     /**
@@ -80,6 +113,7 @@ class StorageController extends Controller
      */
     public function destroy(Storage $storage)
     {
-        //
+        Storage::destroy($storage->id);
+        return redirect('/storage')->with('success', 'Storage data successfully deleted');
     }
 }

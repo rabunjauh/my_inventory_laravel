@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\manufacturer;
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 
 class ManufacturerController extends Controller
@@ -14,7 +14,10 @@ class ManufacturerController extends Controller
      */
     public function index()
     {
-        //
+        return view('/manufacturer/index', [
+            "title" => "Manufacturer Data",
+            "manufacturers" => Manufacturer::all()
+        ]);
     }
 
     /**
@@ -24,7 +27,9 @@ class ManufacturerController extends Controller
      */
     public function create()
     {
-        //
+        return view('/manufacturer/create', [
+            "title" => "Add Manufacturer",
+        ]);
     }
 
     /**
@@ -35,7 +40,14 @@ class ManufacturerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255|unique:manufacturers'
+        ]);
+
+        $validatedData['name'] = ucwords($validatedData['name']);
+
+        Manufacturer::create($validatedData);
+        return redirect('/manufacturer')->with('success', 'Manufacturer data successfully added');
     }
 
     /**
@@ -57,7 +69,10 @@ class ManufacturerController extends Controller
      */
     public function edit(manufacturer $manufacturer)
     {
-        //
+        return view('/manufacturer/edit', [
+            "title" => "Add Manufacturer",
+            "manufacturer" => $manufacturer
+        ]);
     }
 
     /**
@@ -69,7 +84,14 @@ class ManufacturerController extends Controller
      */
     public function update(Request $request, manufacturer $manufacturer)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+
+        $validatedData['name'] = ucwords($validatedData['name']);
+
+        Manufacturer::where('id', $manufacturer->id)->update($validatedData);
+        return redirect('/manufacturer')->with('success', 'Manufacturer data successfully updated');
     }
 
     /**
@@ -80,6 +102,7 @@ class ManufacturerController extends Controller
      */
     public function destroy(manufacturer $manufacturer)
     {
-        //
+        Manufacturer::destroy($manufacturer->id);
+        return redirect('/manufacturer')->with('success', 'Manufacturer data successfully deleted');
     }
 }

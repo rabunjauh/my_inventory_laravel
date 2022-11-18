@@ -1,12 +1,17 @@
 <?php
 
+use App\Http\Controllers\GraphicCardController;
 use App\Http\Controllers\HardwareCategoryController;
-use App\Http\Controllers\SoftwareCategoryController;
+use App\Http\Controllers\HardwareTypeController;
+use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\MemoryController;
+use App\Http\Controllers\ProcessorController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SoftwareCategoryController;
+use App\Http\Controllers\StorageController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\HardwareController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ItemsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +24,13 @@ use App\Http\Controllers\ItemsController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('layouts/main');
-// });
-// Route::get('/hardwareCategory/{edit}', [HardwareCategoryController::class, 'edit']);
+Route::resource('/graphicCard', GraphicCardController::class);
 Route::resource('/hardwareCategory', HardwareCategoryController::class);
-Route::resource('/softwareCategory', SoftwareCategoryController::class);
+Route::resource('/hardwareType', HardwareTypeController::class);
+Route::resource('/manufacturer', ManufacturerController::class);
+Route::resource('/memory', MemoryController::class);
+Route::resource('/processor', ProcessorController::class);
 Route::resource('/project', ProjectController::class);
+Route::resource('/softwareCategory', SoftwareCategoryController::class);
+Route::resource('/storage', storageController::class);
 Route::resource('/supplier', SupplierController::class);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Memory;
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 
 class MemoryController extends Controller
@@ -14,7 +15,10 @@ class MemoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('memory/index', [
+            "title" => "Memory Data",
+            "memories" => Memory::with(Manufacturer::class)->get()
+        ]);
     }
 
     /**
@@ -24,7 +28,10 @@ class MemoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('memory/create', [
+            "title" => "Add Memory Data",
+            "manufacturers" => Manufacturer::all()
+        ]);
     }
 
     /**
@@ -35,7 +42,17 @@ class MemoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'type' => 'required|max:255',
+            'module' => 'required|max:255',
+            'capacity' => 'required|max:255',
+            'manufacturer_id' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        Memory::create($validatedData);
+        return redirect('/memory')->with('success', 'Memory data successfully added');
+
     }
 
     /**
@@ -57,7 +74,11 @@ class MemoryController extends Controller
      */
     public function edit(Memory $memory)
     {
-        //
+        return view('memory/edit', [
+            "title" => "Edit Memory Data",
+            "manufacturers" => Manufacturer::all(),
+            "memory" => $memory
+        ]);
     }
 
     /**
@@ -69,7 +90,16 @@ class MemoryController extends Controller
      */
     public function update(Request $request, Memory $memory)
     {
-        //
+        $validatedData = $request->validate([
+            'type' => 'required|max:255',
+            'module' => 'required|max:255',
+            'capacity' => 'required|max:255',
+            'manufacturer_id' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        Memory::where('id', $memory->id)->update($validatedData);
+        return redirect('/memory')->with('success', 'Memory data successfully updated');
     }
 
     /**
@@ -80,6 +110,7 @@ class MemoryController extends Controller
      */
     public function destroy(Memory $memory)
     {
-        //
+        Memory::destroy($memory->id);
+        return redirect('/memory')->with('success', 'Memory data successfully deleted');
     }
 }

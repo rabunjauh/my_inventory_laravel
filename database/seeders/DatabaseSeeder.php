@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Storage;
+use App\Models\Manufacturer;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +22,17 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        Storage::create([
+            "size" => "2.5",
+            "capacity" => "500 GB",
+            "manufacturer_id" => 1,
+            "technology" => "SSD",
+            "type" => "SATA"
+        ]);
+
+        Manufacturer::create([
+            "name" => "Seagate"
+        ]);
     }
 }

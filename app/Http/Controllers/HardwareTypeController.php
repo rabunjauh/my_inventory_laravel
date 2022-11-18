@@ -14,7 +14,10 @@ class HardwareTypeController extends Controller
      */
     public function index()
     {
-        //
+        return view('hardwareType/index', [
+            "title" => "Hardware Type Data",
+            "types" => HardwareType::all()
+        ]);
     }
 
     /**
@@ -24,7 +27,9 @@ class HardwareTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('hardwareType/create', [
+            "title" => "Add Hardware Type"
+        ]);
     }
 
     /**
@@ -35,7 +40,14 @@ class HardwareTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255|unique:hardware_types'
+        ]);
+
+        $validatedData['name'] = ucwords($validatedData['name']);
+
+        HardwareType::create($validatedData);
+        return redirect('/hardwareType')->with('success', 'Hardware type data successfully added');
     }
 
     /**
@@ -57,7 +69,10 @@ class HardwareTypeController extends Controller
      */
     public function edit(hardwareType $hardwareType)
     {
-        //
+        return view('/hardwareType/edit', [
+            "title" => "Add Hardware type",
+            "type" => $hardwareType
+        ]);
     }
 
     /**
@@ -69,7 +84,14 @@ class HardwareTypeController extends Controller
      */
     public function update(Request $request, hardwareType $hardwareType)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+
+        $validatedData['name'] = ucwords($validatedData['name']);
+
+        HardwareType::where('id', $hardwareType->id)->update($validatedData);
+        return redirect('/hardwareType')->with('success', 'Hardware type data successfully updated');
     }
 
     /**
@@ -80,6 +102,7 @@ class HardwareTypeController extends Controller
      */
     public function destroy(hardwareType $hardwareType)
     {
-        //
+        HardwareType::destroy($hardwareType->id);
+        return redirect('/hardwareType')->with('success', 'Hardware type data successfully deleted');
     }
 }

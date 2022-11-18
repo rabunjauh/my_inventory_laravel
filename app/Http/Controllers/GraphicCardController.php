@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GraphicCard;
+use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 
 class GraphicCardController extends Controller
@@ -14,7 +15,10 @@ class GraphicCardController extends Controller
      */
     public function index()
     {
-        //
+        return view('graphicCard/index', [
+            "title" => "Graphic Card Data",
+            "graphicCards" => GraphicCard::with(['manufacturer'])->get()
+        ]);
     }
 
     /**
@@ -24,7 +28,10 @@ class GraphicCardController extends Controller
      */
     public function create()
     {
-        //
+        return view('graphicCard/create', [
+            "title" => "Add Graphic Card",
+            "manufacturers" => Manufacturer::all()
+        ]);
     }
 
     /**
@@ -35,7 +42,16 @@ class GraphicCardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'type' => 'required|max:255',
+            'capacity' => 'required|max:255',
+            'model' => 'required|max:255',
+            'manufacturer_id' => 'required',
+            'description' => 'nullable'
+        ]);
+
+        GraphicCard::create($validatedData);
+        return redirect('/graphicCard')->with('success', 'Graphic card data successfully added');
     }
 
     /**
@@ -46,7 +62,7 @@ class GraphicCardController extends Controller
      */
     public function show(GraphicCard $graphicCard)
     {
-        //
+        // 
     }
 
     /**
@@ -57,7 +73,11 @@ class GraphicCardController extends Controller
      */
     public function edit(GraphicCard $graphicCard)
     {
-        //
+        return view('graphicCard/edit', [
+            "title" => "Edit Graphic Card Data",
+            "manufacturers" => Manufacturer::all(),
+            "graphicCard" => $graphicCard
+        ]);
     }
 
     /**
@@ -69,7 +89,16 @@ class GraphicCardController extends Controller
      */
     public function update(Request $request, GraphicCard $graphicCard)
     {
-        //
+        $validatedData = $request->validate([
+            'type' => 'required|max:255',
+            'capacity' => 'required|max:255',
+            'model' => 'required|max:255',
+            'manufacturer_id' => 'required',
+            'description' => 'nullable'
+        ]);
+
+        GraphicCard::where('id', $graphicCard->id)->update($validatedData);
+        return redirect('/graphicCard')->with('success', 'Graphic card data successfully updated');
     }
 
     /**
@@ -80,6 +109,7 @@ class GraphicCardController extends Controller
      */
     public function destroy(GraphicCard $graphicCard)
     {
-        //
+        GraphicCard::destroy($graphicCard->id);
+        return redirect('/graphicCard')->with('success', 'Graphic card data successfully deleted');
     }
 }

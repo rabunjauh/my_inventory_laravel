@@ -15,13 +15,11 @@ return new class extends Migration
     {
         Schema::create('storages', function (Blueprint $table) {
             $table->id();
-
-            $table->string('name');
             $table->string('size');
             $table->string('capacity');
-            $table->tinyInteger('manufacture_id');
-            $table->tinyInteger('technology');
-            $table->tinyInteger('type');
+            $table->tinyInteger('manufacturer_id');
+            $table->string('technology');
+            $table->string('type');
             $table->timestamps();
         });
     }

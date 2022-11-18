@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\processor;
+use App\Models\Manufacturer;
+use App\Models\Processor;
 use Illuminate\Http\Request;
 
 class ProcessorController extends Controller
@@ -14,7 +15,10 @@ class ProcessorController extends Controller
      */
     public function index()
     {
-        //
+        return view('processor/index', [
+            "title" => "Processor Data",
+            "processors" => Processor::with(['manufacturer'])->get()
+        ]);
     }
 
     /**
@@ -24,7 +28,10 @@ class ProcessorController extends Controller
      */
     public function create()
     {
-        //
+       return view('processor/create', [
+        "title" => "Add Processor",
+        "manufacturers" => Manufacturer::all()
+       ]);
     }
 
     /**
@@ -35,7 +42,18 @@ class ProcessorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'model_no' => 'required|max:255|unique:processors',
+            'manufacturer_id' => 'required',
+            'core' => 'required',
+            'frequency' => 'required|max:255',
+            'memory_support' => 'required|max:255'
+        ]);
+
+        $validatedData['model_no'] = ucwords($validatedData['model_no']);
+
+        Processor::create($validatedData);
+        return redirect('/processor')->with('success', 'Processor data successfully added');
     }
 
     /**
@@ -57,7 +75,11 @@ class ProcessorController extends Controller
      */
     public function edit(processor $processor)
     {
-        //
+        return view('processor/edit', [
+            "title" => "Edit Processor",
+            "manufacturers" => Manufacturer::all(),
+            "processor" => $processor
+        ]);
     }
 
     /**
@@ -69,7 +91,18 @@ class ProcessorController extends Controller
      */
     public function update(Request $request, processor $processor)
     {
-        //
+        $validatedData = $request->validate([
+            'model_no' => 'required|max:255',
+            'manufacturer_id' => 'required',
+            'core' => 'required',
+            'frequency' => 'required|max:255',
+            'memory_support' => 'required|max:255'
+        ]);
+
+        $validatedData['model_no'] = ucwords($validatedData['model_no']);
+
+        Processor::where('id', $processor->id)->update($validatedData);
+        return redirect('/processor')->with('success', 'Processor data successfully updated');
     }
 
     /**
@@ -80,6 +113,7 @@ class ProcessorController extends Controller
      */
     public function destroy(processor $processor)
     {
-        //
+        Processor::destroy($processor->id);
+        return redirect('/processor')->with('success', 'Processor data successfully deleted');
     }
 }

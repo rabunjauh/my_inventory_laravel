@@ -16,11 +16,27 @@
           <a class="nav-link {{ Request::is('assign') ? 'active' : '' }}" href="/assign">Employee Extension</a>
           <a class="nav-link {{ Request::is('extension') ? 'active' : '' }}" href="/extension">Extension</a>
           <a class="nav-link {{ Request::is('employee') ? 'active' : '' }}" href="/employee">Employee</a>
-          <a class="nav-link {{ Request::is('department') ? 'active' : '' }}" href="/department">Department</a>
-          <a class="nav-link {{ Request::is('position') ? 'active' : '' }}" href="/position">Position</a>
-          <a class="nav-link {{ Request::is('office') ? 'active' : '' }}" href="/office">Office</a>
-          <a class="nav-link {{ Request::is('group') ? 'active' : '' }}" href="/group">Group</a>
-          <a class="nav-link {{ Request::is('user') ? 'active' : '' }}" href="/user">User</a>
+          <a class="nav-link {{ Request::is('hardware') ? 'active' : '' }}" href="/hardware">Hardware</a>
+          <a class="nav-link {{ Request::is('storage') ? 'active' : '' }}" href="/storage">Storage</a>
+          <a class="nav-link {{ Request::is('processor') ? 'active' : '' }}" href="/processor">Processor</a>
+          <a class="nav-link {{ Request::is('graphicCard') ? 'active' : '' }}" href="/graphicCard">Graphic Card</a>
+          <a class="nav-link {{ Request::is('memory') ? 'active' : '' }}" href="/memory">Memory</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Master Data
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item {{ Request::is('hardwareCategory') ? 'active' : '' }}" href="/hardwareCategory">Hardware Category</a></li>
+              <li><a class="dropdown-item {{ Request::is('softwareCategory') ? 'active' : '' }}" href="/softwareCategory">Software Category</a></li>
+              <li><a class="dropdown-item {{ Request::is('manufacturer') ? 'active' : '' }}" href="/manufacturer">Manufacturer</a></li>
+              <li><a class="dropdown-item {{ Request::is('project') ? 'active' : '' }}" href="/project">Project</a></li>
+              <li><a class="dropdown-item {{ Request::is('graphicCard') ? 'active' : '' }}" href="/graphicCard">Graphic Card</a></li>
+              <li><a class="dropdown-item {{ Request::is('memory') ? 'active' : '' }}" href="/memory">Memory</a></li>
+              <li><a class="dropdown-item {{ Request::is('processor') ? 'active' : '' }}" href="/processor">Processor</a></li>
+              <li><a class="dropdown-item {{ Request::is('hardwareType') ? 'active' : '' }}" href="/hardwareType">Hardware Type</a></li>
+              <li><a class="dropdown-item {{ Request::is('supplier') ? 'active' : '' }}" href="/supplier">Supplier</a></li>
+            </ul>
+          </li>
         {{-- @endauth --}}
       </div>
       {{-- @auth --}}
