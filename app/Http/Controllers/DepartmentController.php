@@ -44,6 +44,7 @@ class DepartmentController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255|unique:departments',
             'isActive' => 'required',
+            'group' => 'required',
         ]);
 
         $validatedData['name'] = strtoupper($validatedData['name']);
@@ -86,7 +87,16 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'isActive' => 'required',
+            'group' => 'required',
+        ]);
+
+        $validatedData['name'] = strtoupper($validatedData['name']);
+
+        Department::where('id', $department->id)->update($validatedData);
+        return redirect('/department')->with('success', 'Department data successfully updated');
     }
 
     /**

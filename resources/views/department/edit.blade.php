@@ -83,7 +83,7 @@
               {{ $message }}
             </div>
           @enderror
-        @elseif(old('group', $department->group) == "0")
+        @elseif(old('group', $department->group) == "1")
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" id="group" name="group" value="0">
             <label class="form-check-label" for="group">Internal</label>
