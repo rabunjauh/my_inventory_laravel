@@ -17,7 +17,10 @@
 
     {{-- SweetAlert2 --}}
     <link rel="stylesheet" href="sweetalert2.min.css">
-    
+
+    {{-- Air Datepicker --}}
+    <link rel="stylesheet" href="dist\air-datepicker.css">  
+
     {{-- My Styles --}}
     <link rel="stylesheet" href="/css/style.css">
   </head>
@@ -33,12 +36,16 @@
 
   {{-- Datatables --}}
   <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  {{-- <script src="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"></script> --}}
 
   {{-- Select2 --}}
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   {{-- SweetAlert2 --}}
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  {{-- Air Datepicker --}}
+  <script src="dist\air-datepicker.js"></script>  
 
   {{-- javascript for each view --}}
   @stack('script')

@@ -13,28 +13,28 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hardwares', function (Blueprint $table) {
+        Schema::create('hardware', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->tinyInteger('category_id');
+            $table->tinyInteger('hardware_category_id');
             $table->string('name');
             $table->tinyInteger('manufacturer_id');
             $table->string('serial_number');
             $table->string('status');
-            $table->date('warranty_start');
-            $table->date('warranty_end');
-            $table->text('description');
-            $table->string('image_name');
-            $table->string('image_formant');
-            $table->text('remark');
-            $table->string('service_code');
-            $table->tinyInteger('type_id');
-            $table->tinyInteger('model_id');
+            $table->date('warranty_start')->nullable();
+            $table->date('warranty_end')->nullable();
+            $table->text('description')->nullable();
+            $table->string('image_name')->default('image');
+            $table->string('image_format')->default('jpg');
+            $table->text('remark')->nullable();
+            $table->string('service_code')->nullable();
+            $table->tinyInteger('hardware_type_id');
+            $table->tinyInteger('hardware_model_id');
             $table->tinyInteger('processor_id');
             $table->tinyInteger('memory_id');
             $table->tinyInteger('graphic_card_id');
             $table->tinyInteger('storage_id');
-            $table->string('computer_name');
+            $table->string('computer_name')->nullable();
             $table->timestamps();
         });
     }
@@ -46,6 +46,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hardwares');
+        Schema::dropIfExists('hardware');
     }
 };

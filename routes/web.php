@@ -1,7 +1,10 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\GraphicCardController;
 use App\Http\Controllers\HardwareCategoryController;
+use App\Http\Controllers\HardwareController;
+use App\Http\Controllers\HardwareModelController;
 use App\Http\Controllers\HardwareTypeController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\MemoryController;
@@ -10,8 +13,6 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SoftwareCategoryController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\HardwareController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('/graphicCard', GraphicCardController::class);
 Route::resource('/hardwareCategory', HardwareCategoryController::class);
+Route::resource('/', HardwareController::class);
+Route::resource('/hardwareModel', HardwareModelController::class);
 Route::resource('/hardwareType', HardwareTypeController::class);
 Route::resource('/manufacturer', ManufacturerController::class);
 Route::resource('/memory', MemoryController::class);

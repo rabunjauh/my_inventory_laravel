@@ -17,7 +17,7 @@ class MemoryController extends Controller
     {
         return view('memory/index', [
             "title" => "Memory Data",
-            "memories" => Memory::with(Manufacturer::class)->get()
+            "memories" => Memory::with(['manufacturer'])->get()
         ]);
     }
 

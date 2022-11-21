@@ -10,4 +10,8 @@ class HardwareType extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function hardware() {
+        return $this->hasMany(Hardware::class);
+    }
 }

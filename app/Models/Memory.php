@@ -15,4 +15,8 @@ class Memory extends Model
     public function manufacturer() {
         return $this->belongsTo(Manufacturer::class);
     }
+
+    public function hardware() {
+        return $this->hasMany(Hardware::class);
+    }
 }
