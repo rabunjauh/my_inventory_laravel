@@ -17,7 +17,7 @@ class DepartmentController extends Controller
     {
         return view('department/index', [
             "title" => "Department",
-            "departments" => Department::latest()->get()
+            "departments" => Department::all()
         ]);
     }
 
@@ -28,7 +28,9 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('department/create', [
+            "title" => "Add Deparment",
+        ]);
     }
 
     /**
