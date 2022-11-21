@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
-// use App\Models\Group;
+use App\Models\Group;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -18,7 +18,7 @@ class DepartmentController extends Controller
         return view('department/index', [
             "title" => "Department",
             "menu" => "department",
-            // "offices" => Group::all(),
+            "offices" => Group::all(),
             "departments" => Department::latest()->get()
         ]);
     }
