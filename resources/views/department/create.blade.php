@@ -20,13 +20,14 @@
       </div>
 
       <div class="mb-3">
-        @if(old('isActive') == "0")
+        <label for="isActive" class="form-label">Status</label>
+        @if(old('isActive') == "1")
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="0" checked>
+            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="1" checked>
             <label class="form-check-label" for="isActive">Active</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="1">
+            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="0">
             <label class="form-check-label" for="isActive">Not Active</label>
           </div>
           @error('isActive')
@@ -34,13 +35,13 @@
               {{ $message }}
             </div>
           @enderror
-        @elseif(old('isActive') == "1")
+        @elseif(old('isActive') == "0")
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="0">
+            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="1">
             <label class="form-check-label" for="isActive">Active</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="1" checked>
+            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="0" checked>
             <label class="form-check-label" for="isActive">Not Active</label>
           </div>
           @error('isActive')
@@ -50,14 +51,61 @@
           @enderror
         @else
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="0" checked>
+            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="1" checked>
             <label class="form-check-label" for="isActive">Active</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="1">
+            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="0">
             <label class="form-check-label" for="isActive">Not Active</label>
           </div>
           @error('isActive')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+          @enderror
+        @endif
+      </div>  
+      
+      <div class="mb-3">
+        <label for="group" class="form-label">Group</label>
+        @if(old('group') == "0")
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="group" name="group" value="0" checked>
+            <label class="form-check-label" for="group">Internal</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="group" name="group" value="1">
+            <label class="form-check-label" for="group">External</label>
+          </div>
+          @error('group')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
+        @elseif(old('group') == "0")
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="group" name="group" value="0">
+            <label class="form-check-label" for="group">Internal</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="group" name="group" value="1" checked>
+            <label class="form-check-label" for="group">External</label>
+          </div>
+          @error('group')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
+        @else
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="group" name="group" value="0" checked>
+            <label class="form-check-label" for="group">Internal</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="group" name="group" value="1">
+            <label class="form-check-label" for="group">External</label>
+          </div>
+          @error('group')
           <div class="invalid-feedback">
             {{ $message }}
           </div>

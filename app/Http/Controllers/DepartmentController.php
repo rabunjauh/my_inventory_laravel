@@ -46,7 +46,7 @@ class DepartmentController extends Controller
             'isActive' => 'required',
         ]);
 
-        $validatedData['name'] = ucwords($validatedData['name']);
+        $validatedData['name'] = strtoupper($validatedData['name']);
 
         Department::create($validatedData);
         return redirect('/department')->with('success', 'Department data successfully added');
