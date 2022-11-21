@@ -41,7 +41,15 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255|unique:departments',
+            'isActive' => 'required',
+        ]);
+
+        $validatedData['name'] = ucwords($validatedData['name']);
+
+        Department::create($validatedData);
+        return redirect('/department')->with('success', 'Department data successfully added');
     }
 
     /**

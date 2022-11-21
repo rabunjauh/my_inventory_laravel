@@ -31,6 +31,7 @@
                   <th>No</th>
                   <th>Name</th>
                   <th>Status</th>
+                  <th>Group</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -40,7 +41,8 @@
                     <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $department->name }}</td>
-                      <td>{{ $department->isActive }}</td>
+                      <td>{{ ($department->isActive == 1) ? 'Active' : 'Not Active' }}</td>
+                      <td>{{ ($department->group == 0) ? 'Internal' : 'External' }}</td>
                       <td>
                         <a href="/department/{{ $department->id }}/edit" class="badge bg-warning text-decoration-none">Edit</i></a>  
                         <form action="/department/{{ $department->id }}" method="post" class="d-inline">
