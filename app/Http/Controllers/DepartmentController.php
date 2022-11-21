@@ -17,8 +17,6 @@ class DepartmentController extends Controller
     {
         return view('department/index', [
             "title" => "Department",
-            "menu" => "department",
-            "offices" => Group::all(),
             "departments" => Department::latest()->get()
         ]);
     }
