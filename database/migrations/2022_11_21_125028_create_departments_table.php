@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->tinyInteger('isActive')->default(1);
-            $table->foreignId('group_id');
+            $table->tinyInteger('group')->default(0);
             $table->timestamps();
         });
     }
