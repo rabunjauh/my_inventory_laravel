@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\GraphicCardController;
 use App\Http\Controllers\HardwareCategoryController;
 use App\Http\Controllers\HardwareController;
@@ -25,6 +26,7 @@ use App\Http\Controllers\SupplierController;
 |
 */
 
+Route::resource('/department', DepartmentController::class);
 Route::resource('/graphicCard', GraphicCardController::class);
 Route::resource('/hardwareCategory', HardwareCategoryController::class);
 Route::resource('/', HardwareController::class);
