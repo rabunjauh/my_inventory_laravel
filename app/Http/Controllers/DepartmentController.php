@@ -60,7 +60,7 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        //
+        // 
     }
 
     /**
@@ -71,7 +71,10 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department)
     {
-        //
+        return view('department/edit', [
+            "title" => "Add Deparment",
+            "department" => $department
+        ]);
     }
 
     /**
