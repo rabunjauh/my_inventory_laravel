@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function group() {
+        return $this->belongsTo(Group::class);
+    }
 }
