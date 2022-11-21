@@ -18,6 +18,52 @@
         </div>
         @enderror
       </div>
+
+      <div class="mb-3">
+        @if(old('isActive') == "0")
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="0" checked>
+            <label class="form-check-label" for="isActive">Active</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="1">
+            <label class="form-check-label" for="isActive">Not Active</label>
+          </div>
+          @error('isActive')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
+        @elseif(old('isActive') == "1")
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="0">
+            <label class="form-check-label" for="isActive">Active</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="1" checked>
+            <label class="form-check-label" for="isActive">Not Active</label>
+          </div>
+          @error('isActive')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
+        @else
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="0" checked>
+            <label class="form-check-label" for="isActive">Active</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="isActive" name="isActive" value="1">
+            <label class="form-check-label" for="isActive">Not Active</label>
+          </div>
+          @error('isActive')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+          @enderror
+        @endif
+      </div>  
     </div>
   </div>
 
