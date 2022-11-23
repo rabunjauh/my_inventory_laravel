@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
+            $table->date('do_date');
+            $table->string('do_no');
             $table->date('inventory_date');
             $table->text('remark');
             $table->tinyInteger('supplier_id');
