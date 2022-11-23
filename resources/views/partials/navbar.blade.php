@@ -53,6 +53,25 @@
               <li><a class="dropdown-item {{ Request::is('supplier') ? 'active' : '' }}" href="/supplier">Supplier</a></li>
             </ul>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Transaction
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item {{ Request::is('inventory') ? 'active' : '' }}" href="/inventory">Inventory</a></li>
+              <li><a class="dropdown-item {{ Request::is('/') ? 'active' : '' }}" href="/hardware">Hardware</a></li>
+              <li><a class="dropdown-item {{ Request::is('hardwareCategory') ? 'active' : '' }}" href="/hardwareCategory">Hardware Category</a></li>
+              <li><a class="dropdown-item {{ Request::is('hardwareModel') ? 'active' : '' }}" href="/hardwareModel">Hardware Model</a></li>
+              <li><a class="dropdown-item {{ Request::is('hardwareType') ? 'active' : '' }}" href="/hardwareType">Hardware Type</a></li>
+              <li><a class="dropdown-item {{ Request::is('manufacturer') ? 'active' : '' }}" href="/manufacturer">Manufacturer</a></li>
+              <li><a class="dropdown-item {{ Request::is('memory') ? 'active' : '' }}" href="/memory">Memory</a></li>
+              <li><a class="dropdown-item {{ Request::is('processor') ? 'active' : '' }}" href="/processor">Processor</a></li>
+              <li><a class="dropdown-item {{ Request::is('storage') ? 'active' : '' }}" href="/storage">Storage</a></li>
+              <li><a class="dropdown-item {{ Request::is('project') ? 'active' : '' }}" href="/project">Project</a></li>
+              <li><a class="dropdown-item {{ Request::is('softwareCategory') ? 'active' : '' }}" href="/softwareCategory">Software Category</a></li>
+              <li><a class="dropdown-item {{ Request::is('supplier') ? 'active' : '' }}" href="/supplier">Supplier</a></li>
+            </ul>
+          </li>
         {{-- @endauth --}}
       </div>
       {{-- @auth --}}
