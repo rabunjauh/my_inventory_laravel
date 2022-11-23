@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Inventory extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function hardware() {
+        return $this->belongsTo(Hardware::class);
+    }
+
+    public function supplier() {
+        return $this->belongsTo(Supplier::class);
+    }
 }
