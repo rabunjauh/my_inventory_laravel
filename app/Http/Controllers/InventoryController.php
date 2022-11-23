@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hardware;
 use App\Models\Inventory;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class InventoryController extends Controller
@@ -14,7 +16,10 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('inventory/index', [
+            "title" => "Inventory Data",
+            "inventories" => Inventory::with(['hardware', 'supplier'])
+        ]);
     }
 
     /**
@@ -24,7 +29,11 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('inventory/create', [
+            "title" => "Inventory In",
+            "suppliers" => Supplier::all(),
+            "hardwares" => Hardware::all()
+        ]);
     }
 
     /**
