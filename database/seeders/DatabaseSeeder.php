@@ -4,16 +4,17 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use Illuminate\Database\Seeder;
+use App\Models\Inventory;
 use App\Models\GraphicCard;
+use App\Models\Hardware;
 use App\Models\HardwareCategory;
 use App\Models\HardwareModel;
 use App\Models\HardwareType;
-use Illuminate\Database\Seeder;
-use App\Models\Storage;
 use App\Models\Manufacturer;
 use App\Models\Memory;
 use App\Models\Processor;
-use App\Models\Hardware;
+use App\Models\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,6 +31,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        Inventory::create([
+            "do_date" => "2022-11-23",
+            "do_no" => "43241234",
+            "inventory_date" => "2022-11-23",
+            "remark" => "",
+            "supplier_id" => 1
+        ]);
 
         Hardware::create([
             "code" => "1",

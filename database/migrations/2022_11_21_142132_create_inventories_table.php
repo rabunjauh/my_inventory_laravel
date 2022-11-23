@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
-            $table->date('do_date');
-            $table->string('do_no');
+            $table->date('do_date')->nullable();
+            $table->string('do_no')->nullable();
             $table->date('inventory_date');
-            $table->text('remark');
+            $table->text('remark')->nullable();
             $table->tinyInteger('supplier_id');
             $table->timestamps();
         });
