@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('do_no')->nullable();
             $table->date('inventory_date');
             $table->text('remark')->nullable();
-            $table->tinyInteger('supplier_id');
+            $table->bigInteger('supplier_id');
             $table->timestamps();
         });
     }
