@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('frequency');
             $table->string('memory_support');
             $table->timestamps();
+            $table->foreign('manufacturer_id')->references('id')->on('manufacturers')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
