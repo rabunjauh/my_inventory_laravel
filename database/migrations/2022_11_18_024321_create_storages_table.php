@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('size');
             $table->string('capacity');
-            $table->tinyInteger('manufacturer_id');
+            $table->bigInteger('manufacturer_id');
             $table->string('technology');
             $table->string('type');
             $table->timestamps();

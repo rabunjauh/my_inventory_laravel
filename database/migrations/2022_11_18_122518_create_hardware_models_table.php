@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('hardware_models', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('manufacturer_id');
+            $table->bigInteger('manufacturer_id');
             $table->timestamps();
         });
     }

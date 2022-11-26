@@ -1,6 +1,8 @@
-$(document).ready( function () {
-  $('#inventories').DataTable({
-    "sScrollX": "100%",
-    "bScrollCollapse": true
-  });
-} );
+// $(document).ready( function () {
+//   $('#inventories').DataTable();
+// });
+// Datatables
+document.addEventListener('DOMContentLoaded', function () {
+  let table = new DataTable('#inventories');
+});
+

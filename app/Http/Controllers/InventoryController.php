@@ -18,7 +18,7 @@ class InventoryController extends Controller
     {
         return view('inventory/index', [
             "title" => "Inventory Data",
-            "inventories" => Inventory::with(['hardware', 'supplier'])
+            "inventories" => Inventory::with(['hardware', 'supplier'])->get()
         ]);
     }
 

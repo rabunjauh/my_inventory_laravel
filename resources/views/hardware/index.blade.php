@@ -51,7 +51,6 @@
                 </tr>
               </thead>`
               <tbody>
-                @if ($hardwares->count())
                   @foreach ($hardwares as $hardware)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
@@ -84,7 +83,6 @@
                       </td>
                     </tr>    
                   @endforeach
-                @endif
               </tbody>
             </table>
           </div>

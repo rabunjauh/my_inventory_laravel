@@ -15,6 +15,7 @@ use App\Models\Manufacturer;
 use App\Models\Memory;
 use App\Models\Processor;
 use App\Models\Storage;
+use App\Models\Supplier;
 
 class DatabaseSeeder extends Seeder
 {
@@ -38,6 +39,10 @@ class DatabaseSeeder extends Seeder
             "inventory_date" => "2022-11-23",
             "remark" => "",
             "supplier_id" => 1
+        ]);
+
+        Supplier::create([
+            "name" => "Wasco Warehouse"
         ]);
 
         Hardware::create([

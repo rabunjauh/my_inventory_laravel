@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('processors', function (Blueprint $table) {
             $table->id();
             $table->string('model_no');
-            $table->tinyInteger('manufacturer_id');
+            $table->bigInteger('manufacturer_id');
             $table->tinyInteger('core');
             $table->string('frequency');
             $table->string('memory_support');

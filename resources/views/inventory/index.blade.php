@@ -19,38 +19,33 @@
         <div class="row mb-2">
         <div class="col-lg-5">
           <a href="/inventory/create" class="btn btn-primary">
-            Inventory In</a>
+            Add Inventory</a>
           </div>
         </div>
         
         <div class="row">
           <div class="col-lg-12">
-            <table class="table table-bordered" id="inventories">
+            <table class="table table-bordered table-striped" id="inventories">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Hardware Code</th>
-                  <th>Serial No</th>
-                  <th>Type</th>
-                  <th>Model</th>
-                  <th>Operating System</th>
-                  <th>Processor</th>
-                  <th>Memory</th>
-                  <th>Hard Disk</th>
-                  <th>Qty</th>
-                  <th>Alert Qty</th>
                   <th>Inventory Date</th>
+                  <th>DO Date</th>
+                  <th>DO No</th>
+                  <th>Supplier Name</th>
+                  <th>Remark</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                @if ($inventories->count())
                   @foreach ($inventories as $inventory)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ $inventory->hardware->code }}</td>
-                      <td>{{ ($inventory->hardware) ? 'Active' : 'Not Active' }}</td>
-                      <td>{{ ($inventory->hardware) ? 'Internal' : 'External' }}</td>
+                      <td>{{ $inventory->inventory_date }}</td>
+                      <td>{{ $inventory->do_date }}</td>
+                      <td>{{ $inventory->do_no }}</td>
+                      <td>{{ $inventory->supplier->name }}</td>
+                      <td>{{ $inventory->remark }}</td>
                       <td>
                         <a href="/inventory/{{ $inventory->id }}/edit" class="badge bg-warning text-decoration-none">Edit</i></a>  
                         <form action="/inventory/{{ $inventory->id }}" method="post" class="d-inline">
@@ -61,7 +56,6 @@
                       </td>
                     </tr>    
                   @endforeach
-                @endif
               </tbody>
             </table>
           </div>
