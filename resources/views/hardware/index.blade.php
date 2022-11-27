@@ -17,7 +17,7 @@
 
         <div class="row mb-2">
         <div class="col-lg-5">
-          <a href="/hardware/create" class="btn btn-primary">
+          <a href="/create" class="btn btn-primary">
             Add Hardware</a>
           </div>
         </div>
@@ -28,6 +28,7 @@
               <thead>
                 <tr>
                     <th>No</th>
+                    <th>Action</th>
                     <th>Hardware Code</th>
                     <th>Category</th>
                     <th>Hardware Name</th>
@@ -40,18 +41,17 @@
                     <th>Memory</th>
                     <th>Graphic Card</th>
                     <th>Storage</th>
-                    <th>Warranty Start</th>
+                    {{-- <th>Warranty Start</th>
                     <th>Warranty End</th>
                     <th>Description</th>
-                    <th>Remark</th>
+                    <th>Remark</th> --}}
                     <th>Service Code</th>
                     <th>Computer Name</th>
-                    <th>Image</th>
-                    <th>Action</th>
+                    {{-- <th>Image</th> --}}
                 </tr>
               </thead>`
               <tbody>
-                  @foreach ($hardwares as $hardware)
+                  {{-- @foreach ($hardwares as $hardware)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $hardware->code }}</td>
@@ -82,7 +82,7 @@
                         </form>
                       </td>
                     </tr>    
-                  @endforeach
+                  @endforeach --}}
               </tbody>
             </table>
           </div>

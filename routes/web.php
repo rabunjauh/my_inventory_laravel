@@ -15,6 +15,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SoftwareCategoryController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\SupplierController;
+// use App\Models\Hardware;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ use App\Http\Controllers\SupplierController;
 Route::resource('/department', DepartmentController::class);
 Route::resource('/graphicCard', GraphicCardController::class);
 Route::resource('/hardwareCategory', HardwareCategoryController::class);
+Route::get('/hardware/json', [HardwareController::class, 'hardware_ajax'])->name('hardware_ajax');
 Route::resource('/', HardwareController::class);
 Route::resource('/hardwareModel', HardwareModelController::class);
 Route::resource('/hardwareType', HardwareTypeController::class);

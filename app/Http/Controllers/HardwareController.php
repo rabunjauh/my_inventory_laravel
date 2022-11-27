@@ -12,6 +12,7 @@ use App\Models\Memory;
 use App\Models\Processor;
 use App\Models\Storage;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class HardwareController extends Controller
 {
@@ -185,5 +186,33 @@ class HardwareController extends Controller
     {
         Hardware::destroy($hardware->id);
         return redirect('/hardware')->with('success', 'Hardware data successfully deleted');
+    }
+
+    public function hardware_ajax() {
+        // return DataTables::of(Hardware::query())->toJson();
+        return DataTables::of(Hardware::with([
+            'hardwareCategory', 
+            'graphicCard', 
+            'hardwareModel',
+            'hardwareType',
+            'manufacturer',
+            'memory',
+            'processor',
+            'storage'
+        ])
+        ->get())
+        ->addIndexColumn()
+        // ->addColumn('action', function($row) {
+        //     $detailUrl = '<a href="/hardware/' . $row->id . '/show" class="badge bg-info text-decoration-none">Detail</a>';
+        //     $editUrl = '<a href="/hardware/' . $row->id . '/edit" class="badge bg-info text-decoration-none">Edit</a>';
+        //     $deleteButton = '<form action="/hardware/{{ $hardware->id }}" method="post" class="d-inline">';
+        //     $deleteButton .= '@method("delete")';
+        //     $deleteButton .= '@csrf';
+        //     $deleteButton .= '<button class="badge bg-danger border-0" onclick="return confirm("Are you sure?")">Delete</button>';
+        //     $deleteButton .= '</form>';
+        //     return $detailUrl . '&nbsp' . $editUrl . '&nbsp' . $deleteButton;
+        // })
+        ->addColumn('action', 'hardware/action')
+        ->toJson();
     }
 }
