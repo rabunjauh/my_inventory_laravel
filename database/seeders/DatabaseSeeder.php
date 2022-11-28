@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Inventory;
+use App\Models\InventoryDetail;
 use App\Models\GraphicCard;
 use App\Models\Hardware;
 use App\Models\HardwareCategory;
@@ -39,6 +40,12 @@ class DatabaseSeeder extends Seeder
             "inventory_date" => "2022-11-23",
             "remark" => "",
             "supplier_id" => 1
+        ]);
+
+        InventoryDetail::create([
+            "inventory_id" => 1,
+            "hardware_id" => 1,
+            "quantity" => 10,
         ]);
 
         Supplier::create([

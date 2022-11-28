@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('processors', function (Blueprint $table) {
+        Schema::create('inventory_details', function (Blueprint $table) {
             $table->id();
-            $table->string('model_no');
-            $table->bigInteger('manufacturer_id');
-            $table->tinyInteger('core');
-            $table->string('frequency');
-            $table->string('memory_support');
+            $table->bigInteger('inventory_id');
+            $table->bigInteger('hardware_id');
+            $table->integer('quantity');
             $table->timestamps();
-            // $table->foreign('manufacturer_id')->references('id')->on('manufacturers')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('processors');
+        Schema::dropIfExists('inventory_details');
     }
 };

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Inventory extends Model
+class InventoryDetail extends Model
 {
     use HasFactory;
 
@@ -15,11 +15,7 @@ class Inventory extends Model
         return $this->belongsTo(Hardware::class);
     }
 
-    public function supplier() {
-        return $this->belongsTo(Supplier::class);
-    }
-
-    public function inventoryDetail() {
-        return $this->hasMany(InventoryDetail::class);
+    public function inventory() {
+        return $this->belongsTo(Inventory::class);
     }
 }

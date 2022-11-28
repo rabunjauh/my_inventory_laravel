@@ -31,7 +31,7 @@ class InventoryController extends Controller
     public function create()
     {
         return view('inventory/create', [
-            "title" => "Inventory In",
+            "title" => "Inventory In"
         ]);
     }
 

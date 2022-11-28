@@ -11,12 +11,12 @@ class Hardware extends Model
 
     protected $guarded = ['id'];
 
-    public function hardwareCategory()  {
-        return $this->belongsTo(HardwareCategory::class);
-    }
-
     public function graphicCard() {
         return $this->belongsTo(graphicCard::class);
+    }
+    
+    public function hardwareCategory()  {
+        return $this->belongsTo(HardwareCategory::class);
     }
 
     public function hardwareModel() {
@@ -25,6 +25,10 @@ class Hardware extends Model
 
     public function hardwareType() {
         return $this->belongsTo(HardwareType::class);
+    }
+
+    public function inventoryDetail() {
+        return $this->hasMany(InventoryDetail::class);
     }
 
     public function manufacturer() {
