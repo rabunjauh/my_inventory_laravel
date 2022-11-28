@@ -35,6 +35,7 @@ Route::get('/hardware/json', [HardwareController::class, 'hardware_ajax'])->name
 Route::resource('/', HardwareController::class);
 Route::resource('/hardwareModel', HardwareModelController::class);
 Route::resource('/hardwareType', HardwareTypeController::class);
+Route::get('/inventory/json', [InventoryController::class, 'inventory_ajax'])->name('inventory_ajax');
 Route::resource('/inventory', InventoryController::class);
 Route::resource('/manufacturer', ManufacturerController::class);
 Route::resource('/memory', MemoryController::class);

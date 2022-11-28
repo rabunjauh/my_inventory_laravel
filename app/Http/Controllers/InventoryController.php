@@ -6,6 +6,7 @@ use App\Models\Hardware;
 use App\Models\Inventory;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class InventoryController extends Controller
 {
@@ -31,8 +32,6 @@ class InventoryController extends Controller
     {
         return view('inventory/create', [
             "title" => "Inventory In",
-            "suppliers" => Supplier::all(),
-            "hardwares" => Hardware::all()
         ]);
     }
 
@@ -44,7 +43,9 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view('inventory/details', [
+            "title" => "Inventory Detail"
+        ]);
     }
 
     /**
@@ -90,5 +91,15 @@ class InventoryController extends Controller
     public function destroy(Inventory $inventory)
     {
         //
+    }
+
+    public function inventory_ajax() {
+        return DataTables::of(Inventory::with([
+            'hardware',
+            'supplier'])
+        ->get())
+        ->addIndexColumn()
+        ->addColumn('action', 'inventory/action')
+        ->toJson();
     }
 }

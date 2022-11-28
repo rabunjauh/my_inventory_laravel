@@ -126,7 +126,49 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <table class="table table-bordered table-striped" id="items">
+        <table class="table table-bordered table-striped" id="hardwareItems">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Hardware Code</th>
+              <th>Category</th>
+              <th>Hardware Name</th>
+              <th>Manufacturer</th>
+              <th>Serial Number</th>
+              <th>Status</th>
+              <th>Type</th>
+              <th>Model</th>
+              <th>Processor</th>
+              <th>Memory</th>
+              <th>Graphic Card</th>
+              <th>Storage Capacity</th>
+              <th>Warranty Start</th>
+              <th>Warranty End</th>
+              <th>Express Service Code</th>
+              <th>Computer Name</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Software -->
+<div class="modal fade modal-xl modal-dialog-scrollable" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Items</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered table-striped" id="softwareItems">
           <thead>
             <tr>
               <th>No</th>
