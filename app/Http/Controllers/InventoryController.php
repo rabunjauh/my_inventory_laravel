@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hardware;
 use App\Models\Inventory;
+use App\Models\InventoryDetail;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -31,7 +32,8 @@ class InventoryController extends Controller
     public function create()
     {
         return view('inventory/create', [
-            "title" => "Inventory In"
+            "title" => "Inventory In",
+            "suppliers" => Supplier::all()
         ]);
     }
 
@@ -56,7 +58,10 @@ class InventoryController extends Controller
      */
     public function show(Inventory $inventory)
     {
-        //
+        return view('inventory/show', [
+            "title" => "Inventory Detail",
+            "inventory" => $inventory
+        ]);
     }
 
     /**
@@ -100,6 +105,18 @@ class InventoryController extends Controller
         ->get())
         ->addIndexColumn()
         ->addColumn('action', 'inventory/action')
+        ->toJson();
+    }
+
+    // public function inventoryDetailAjax($inventoryId) {
+    public function inventoryDetailAjax($inventoryId) {
+        return DataTables::of(InventoryDetail::with([
+            'hardware',
+            'inventory'
+        ])
+        ->where('inventory_id', $inventoryId)
+        ->get())
+        ->addIndexColumn()
         ->toJson();
     }
 }

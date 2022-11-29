@@ -49,40 +49,8 @@
                     <th>Computer Name</th>
                     {{-- <th>Image</th> --}}
                 </tr>
-              </thead>`
+              </thead>
               <tbody>
-                  {{-- @foreach ($hardwares as $hardware)
-                    <tr>
-                      <td>{{ $loop->iteration }}</td>
-                      <td>{{ $hardware->code }}</td>
-                      <td>{{ $hardware->hardwareCategory->name }}</td>
-                      <td>{{ $hardware->name }}</td>
-                      <td>{{ $hardware->manufacturer->name }}</td>
-                      <td>{{ $hardware->serial_number }}</td>
-                      <td>{{ ( $hardware->status == "1" ? 'Active' : 'Not Active') }}</td>
-                      <td>{{ $hardware->hardwareType->name }}</td>
-                      <td>{{ $hardware->hardwareModel->name }}</td>
-                      <td>{{ $hardware->processor->model_no }}</td>
-                      <td>{{ $hardware->memory->capacity }}</td>
-                      <td>{{ $hardware->graphicCard->model }}</td>
-                      <td>{{ $hardware->storage->capacity }}</td>
-                      <td>{{ $hardware->warranty_start }}</td>
-                      <td>{{ $hardware->warranty_end }}</td>
-                      <td>{{ $hardware->description }}</td>
-                      <td>{{ $hardware->remark }}</td>
-                      <td>{{ $hardware->service_code }}</td>
-                      <td>{{ $hardware->computer_name }}</td>
-                      <td><img src="{{ $hardware->image_name}}.{{ $hardware->image_format }}" alt=""></td>
-                      <td>
-                        <a href="/hardware/{{ $hardware->id }}/edit" class="badge bg-warning text-decoration-none">Edit</i></a>  
-                        <form action="/hardware/{{ $hardware->id }}" method="post" class="d-inline">
-                          @method('delete')
-                          @csrf
-                          <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')">Delete</button>
-                        </form>
-                      </td>
-                    </tr>    
-                  @endforeach --}}
               </tbody>
             </table>
           </div>

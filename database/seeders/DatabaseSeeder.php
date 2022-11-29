@@ -47,6 +47,12 @@ class DatabaseSeeder extends Seeder
             "hardware_id" => 1,
             "quantity" => 10,
         ]);
+        
+        InventoryDetail::create([
+            "inventory_id" => 1,
+            "hardware_id" => 1,
+            "quantity" => 5,
+        ]);
 
         Supplier::create([
             "name" => "Wasco Warehouse"

@@ -62,10 +62,10 @@
     </div>
   </div>
 
-  <div class="row mt-3 mb-5">
+  <div class="row mt-3">
     <h2>Hardware</h2>
     <div class="col-lg-12">
-      <table class="table table-bordered table-striped" id="hardwareInventoryDetails">
+      <table class="table table-bordered table-striped" id="inventoryDetails">
         <thead>
           <tr>
             <th>No</th>
@@ -80,29 +80,6 @@
       </table>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="browseHardware" data-bs-target="#staticBackdrop">
         Browse Hardware
-      </button>
-    </div>
-  </div>
-  <hr>
-  
-  <div class="row mt-3 mb-5">
-    <h2>Software</h2>
-    <div class="col-lg-12">
-      <table class="table table-bordered table-striped" id="softwareInventoryDetails">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Hardware</th>
-            <th>Serial No</th>
-            <th>Quantity</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="browseSoftware" data-bs-target="#staticBackdrop">
-        Browse Software
       </button>
     </div>
   </div>
@@ -149,69 +126,6 @@
             </tr>
           </thead>
           <tbody>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal for Software -->
-<div class="modal fade modal-xl modal-dialog-scrollable" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Items</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <table class="table table-bordered table-striped" id="softwareItems">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Hardware Code</th>
-              <th>Category</th>
-              <th>Hardware Name</th>
-              <th>Manufacturer</th>
-              <th>Serial Number</th>
-              <th>Status</th>
-              <th>Type</th>
-              <th>Model</th>
-              <th>Processor</th>
-              <th>Memory</th>
-              <th>Graphic Card</th>
-              <th>Storage Capacity</th>
-              <th>Warranty Start</th>
-              <th>Warranty End</th>
-              <th>Express Service Code</th>
-              <th>Computer Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($hardwares as $hardware)
-              <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $hardware->code }}</td>
-                <td>{{ $hardware->hardwareCategory->name }}</td>
-                <td>{{ $hardware->name }}</td>
-                <td>{{ $hardware->manufacturer->name }}</td>
-                <td>{{ $hardware->serial_number }}</td>
-                <td>{{ ( $hardware->status == "1" ? 'Active' : 'Not Active') }}</td>
-                <td>{{ $hardware->hardwareType->name }}</td>
-                <td>{{ $hardware->hardwareModel->name }}</td>
-                <td>{{ $hardware->processor->model_no }}</td>
-                <td>{{ $hardware->memory->capacity }}</td>
-                <td>{{ $hardware->graphicCard->model }}</td>
-                <td>{{ $hardware->storage->capacity }}</td>
-                <td>{{ $hardware->warranty_start }}</td>
-                <td>{{ $hardware->warranty_end }}</td>
-                <td>{{ $hardware->service_code }}</td>
-                <td>{{ $hardware->computer_name }}</td>
-              </tr>  
-            @endforeach
           </tbody>
         </table>
       </div>

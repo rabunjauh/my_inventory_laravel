@@ -1,10 +1,12 @@
 // Datatables
 document.addEventListener('DOMContentLoaded', function () {
-  let table = new DataTable('#inventoryDetails');
+  let table = new DataTable('#inventoryDetails', {
+    
+  });
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  let table = new DataTable('#items', {
+  let table = new DataTable('#hardwareItems', {
     "sScrollX": "100%",
     "bScrollCollapse": true
   });
