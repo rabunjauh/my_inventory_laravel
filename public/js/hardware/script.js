@@ -1,6 +1,6 @@
 // Datatables
-$(document).ready( function () {
-  $('#hardwares').DataTable({
+document.addEventListener('DOMContentLoaded', function () {
+  let table = new DataTable('#hardwares', {
     processing: true,
     serverSide: true,
     ajax: 'http://127.0.0.1:8000/hardware/json',

@@ -41,13 +41,8 @@
                     <th>Memory</th>
                     <th>Graphic Card</th>
                     <th>Storage</th>
-                    {{-- <th>Warranty Start</th>
-                    <th>Warranty End</th>
-                    <th>Description</th>
-                    <th>Remark</th> --}}
                     <th>Service Code</th>
                     <th>Computer Name</th>
-                    {{-- <th>Image</th> --}}
                 </tr>
               </thead>
               <tbody>
