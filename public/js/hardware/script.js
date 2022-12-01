@@ -4,13 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     processing: true,
     serverSide: true,
     ajax: 'http://127.0.0.1:8000/hardware/json',
-    // columnDefs: [
-    //   {
-    //     targets: -1,
-    //             data: null,
-    //             defaultContent: '<button>Click!</button>',
-    //   }
-    // ],
     columns: [
     { 
       data: 'DT_RowIndex',

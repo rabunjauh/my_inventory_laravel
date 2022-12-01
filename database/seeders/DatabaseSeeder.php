@@ -80,6 +80,29 @@ class DatabaseSeeder extends Seeder
             "storage_id" => 1,
             "computer_name" => "dfadsaf"
         ]);
+        
+        Hardware::create([
+            "code" => "2",
+            "hardware_category_id" => 1,
+            "name" => "Dell Optiplex 5080",
+            "manufacturer_id" => 1,
+            "serial_number" => "ffeeefds",
+            "status" => 1,
+            // "warranty_start" => "",
+            // "warranty_end" => "",
+            "description" => "",
+            "image_name" => "image",
+            "image_format" => "jpg",
+            "remark" => "",
+            "service_code" => "fedss",
+            "hardware_type_id" => 1,
+            "hardware_model_id" => 1,
+            "processor_id" => 1,
+            "memory_id" => 1,
+            "graphic_card_id" => 1,
+            "storage_id" => 1,
+            "computer_name" => "erafdsaf"
+        ]);
 
         Storage::create([
             "size" => "2.5",

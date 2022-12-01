@@ -7,8 +7,6 @@
   </div>
   <div class="row">
     <div class="col-lg-5">
-      <form action="/inventory" method="post">
-        @csrf
       <div class="mb-3">
         <label for="type" class="form-label">Inventory Date</label>
         <input type="text" class="form-control @error('inventory_date')is-invalid @enderror" id="inventory_date" name="inventory_date" value="{{ old('inventory_date') }}" placeholder="Inventory Date" required autofocus>
@@ -61,9 +59,9 @@
       </div>
     </div>
   </div>
-
+      <form action="/inventory" method="post">
+        @csrf
   <div class="row mt-3">
-    <h2>Hardware</h2>
     <div class="col-lg-12">
       <table class="table table-bordered table-striped" id="inventoryDetails">
         <thead>
@@ -119,8 +117,6 @@
               <th>Memory</th>
               <th>Graphic Card</th>
               <th>Storage Capacity</th>
-              <th>Warranty Start</th>
-              <th>Warranty End</th>
               <th>Express Service Code</th>
               <th>Computer Name</th>
             </tr>
