@@ -216,4 +216,15 @@ class HardwareController extends Controller
         ->addColumn('action', 'hardware/action')
         ->toJson();
     }
+
+    public function hardware_ajax_select() {
+        $data = Hardware::where('serial_number', 'LIKE', '%' . request('q') . '%')->paginate(2);
+
+        return response()->json($data);
+    }
+
+    public function hardware_by_id($id) {
+        $data = Hardware::where('id', $id)->get();
+        return response()->json($data);
+    }
 }

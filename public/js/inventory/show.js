@@ -1,12 +1,10 @@
-// $(document).ready( function () {
-//   $('#inventories').DataTable();
-// });
 // Datatables
 const inventoryId = document.getElementById('inventoryId').value;
 document.addEventListener('DOMContentLoaded', function () {
   let table = new DataTable('#inventoryDetails', {
     processing: true,
     serverSide: true,
+    // ajax: '/inventory/inventoryDetailJson/1',
     ajax: '/inventory/inventoryDetailJson/' + inventoryId,
     columns: [
       {

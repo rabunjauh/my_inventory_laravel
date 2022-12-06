@@ -7,6 +7,7 @@ use App\Models\Inventory;
 use App\Models\InventoryDetail;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;                        
 use Yajra\DataTables\Facades\DataTables;
 
 class InventoryController extends Controller
@@ -45,9 +46,59 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-        return view('inventory/details', [
-            "title" => "Inventory Detail"
+
+        $validatedInventory = $request->validate([
+            'do_date' => 'required|date',
+            'do_no' => 'required|numeric',
+            'inventory_date' => 'required|date',
+            'supplier_id' => 'required|numeric',
         ]);
+
+        $validatedInventoryDetails = $request->validate([
+            'inventory_id.*' => 'required|numeric', 
+            'hardware_id.*' => 'required|numeric|distinct',
+            'quantity.*' => 'required|numeric|distinct'
+        ]);
+
+        $inventory = Inventory::create($validatedInventory);
+        if($inventory) {
+            for($i = 0; $i < count($request->input('hardware_id')); $i++) {
+                $validatedInventoryDetails['inventory_id'] = $inventory->id;
+                $validatedInventoryDetails['hardware_id'] = $request->input('hardware_id')[$i];
+                $validatedInventoryDetails['quantity'] = $request->input('quantity')[$i];
+                InventoryDetail::create($validatedInventoryDetails);
+            }
+        }
+
+
+        // $input['do_data'] = $request->input('do_date');
+        // $input['do_no'] = $request->input('do_no');
+        // $input['inventory_date'] = $request->input('inventory_date');
+        // $input['supplier_id'] = $request->input('supplier_id');
+
+        // $inventory = Inventory::create($input);
+        // if($inventory->id) {
+        //     for($i = 0; $i < count($request->input('hardware_id')); $i++) {
+        //         // $validatedInventoryDetails['inventory_id'][$i] = $inventory->id;
+        //         $multiple_input['inventory_id'] = $inventory->id;
+        //         $multiple_input['hardware_id'] = $request->input('hardware_id')[$i];
+        //         $multiple_input['quantity'] = $request->input('quantity')[$i];
+        //         InventoryDetail::create($multiple_input);
+        //     }
+        //     // foreach ($validatedInventoryDetails as $key => $value) {
+        //     //     var_dump($value);
+        //         // InventoryDetail::create($value);
+        //     // }
+        // }
+
+        
+
+        // foreach($request->input('inventory_id') as $key => $value) {
+        //     DB::transaction(function() {
+        //         Inventory::create($validatedData);
+        //     });
+        // }
+
     }
 
     /**
@@ -95,7 +146,11 @@ class InventoryController extends Controller
      */
     public function destroy(Inventory $inventory)
     {
-        //
+        DB::transaction(function () {
+            DB::update('update users set votes = 1');
+         
+            DB::delete('delete from posts');
+        });
     }
 
     public function inventory_ajax() {

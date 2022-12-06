@@ -19,7 +19,7 @@
 
     <div class="row mt-3 mb-5">
       <div class="col-lg-12">
-        <table class="table table-bordered table-striped" id="InventoryDetails">
+        <table class="table table-bordered table-striped" id="inventoryDetails">
           <thead>
             <tr>
               <th>No</th>
