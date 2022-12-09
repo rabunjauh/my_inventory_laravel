@@ -16,7 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     {{-- Air Datepicker --}}
-    <link rel="stylesheet" href="dist\air-datepicker.css">  
+    {{-- <link rel="stylesheet" href="dist\air-datepicker.css">   --}}
 
     {{-- My Styles --}}
     <link rel="stylesheet" href="/css/style.css">
@@ -38,8 +38,8 @@
   {{-- Select2 --}}
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-  {{-- Air Datepicker --}}
-  <script src="dist\air-datepicker.js"></script>  
+  {{-- Air Datepicker
+  <script src="dist\air-datepicker.js"></script>   --}}
 
   {{-- javascript for each view --}}
   @stack('script')

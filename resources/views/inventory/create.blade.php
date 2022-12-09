@@ -2,6 +2,14 @@
 
 @section('container')
 <div class="container">
+  <div class="row">
+    @if (session()->has('failed'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ session('failed') }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+  </div>
   <form action="/inventory" method="post">
     @csrf
   <div class="row">
@@ -63,14 +71,22 @@
     </div>
   </div>
 
-  <div class="row mt-3">
+  {{-- <div class="row mt-3">
     <div class="col-lg-6">
       <select class="form-control js-example-basic-single" id="selectHardware" name="selectHardware">
       <option></option>
       </select>
     </div>
-  </div>
+  </div> --}}
 
+  <div class="row mt-3">
+    <div class="col-lg-6">
+      <!-- Button trigger modal -->
+      <button type="button" id="browseItems" name="browseItems" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Browse
+      </button>
+    </div>
+  </div>
   <div class="row mt-3">
     <div class="col-lg-12">
       <table class="table table-bordered table-striped" id="inventoryDetails">
@@ -98,6 +114,46 @@
     </div>
   </div>
     </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade modal-xl" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped table-sm" id="hardwares" style="width:100%">
+          <thead>
+            <tr>
+                <th>No</th>
+                <th>Hardware Code</th>
+                <th>Category</th>
+                <th>Hardware Name</th>
+                <th>Manufacturer</th>
+                <th>Serial Number</th>
+                <th>Status</th>
+                <th>Type</th>
+                <th>Model</th>
+                <th>Processor</th>
+                <th>Memory</th>
+                <th>Graphic Card</th>
+                <th>Storage</th>
+                <th>Service Code</th>
+                <th>Computer Name</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection
 

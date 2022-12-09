@@ -62,43 +62,17 @@ class InventoryController extends Controller
 
         $inventory = Inventory::create($validatedInventory);
         if($inventory) {
-            for($i = 0; $i < count($request->input('hardware_id')); $i++) {
-                $validatedInventoryDetails['inventory_id'] = $inventory->id;
-                $validatedInventoryDetails['hardware_id'] = $request->input('hardware_id')[$i];
-                $validatedInventoryDetails['quantity'] = $request->input('quantity')[$i];
-                InventoryDetail::create($validatedInventoryDetails);
+            if($request->input('hardware_id')){
+                for($i = 0; $i < count($request->input('hardware_id')); $i++) {
+                    $validatedInventoryDetails['inventory_id'] = $inventory->id;
+                    $validatedInventoryDetails['hardware_id'] = $request->input('hardware_id')[$i];
+                    $validatedInventoryDetails['quantity'] = $request->input('quantity')[$i];
+                    InventoryDetail::create($validatedInventoryDetails);
+                }
+            } else {
+                return redirect('inventory/create')->with('failed', 'At least 1 item must be selected!');
             }
         }
-
-
-        // $input['do_data'] = $request->input('do_date');
-        // $input['do_no'] = $request->input('do_no');
-        // $input['inventory_date'] = $request->input('inventory_date');
-        // $input['supplier_id'] = $request->input('supplier_id');
-
-        // $inventory = Inventory::create($input);
-        // if($inventory->id) {
-        //     for($i = 0; $i < count($request->input('hardware_id')); $i++) {
-        //         // $validatedInventoryDetails['inventory_id'][$i] = $inventory->id;
-        //         $multiple_input['inventory_id'] = $inventory->id;
-        //         $multiple_input['hardware_id'] = $request->input('hardware_id')[$i];
-        //         $multiple_input['quantity'] = $request->input('quantity')[$i];
-        //         InventoryDetail::create($multiple_input);
-        //     }
-        //     // foreach ($validatedInventoryDetails as $key => $value) {
-        //     //     var_dump($value);
-        //         // InventoryDetail::create($value);
-        //     // }
-        // }
-
-        
-
-        // foreach($request->input('inventory_id') as $key => $value) {
-        //     DB::transaction(function() {
-        //         Inventory::create($validatedData);
-        //     });
-        // }
-
     }
 
     /**
