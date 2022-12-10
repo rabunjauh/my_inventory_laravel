@@ -108,7 +108,7 @@
 
   <div class="row mt-5">
     <div class="col-md-6">
-      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="submit" id="submit" class="btn btn-primary" disabled>Save</button>
       <button type="reset" class="btn btn-warning">Reset</button>
       <a href="/inventory" class="btn btn-info ms-auto">Back</a>
     </div>

@@ -168,6 +168,13 @@ document.addEventListener('DOMContentLoaded', function () {
     inventories.forEach((inventory, index) => {
       addItems(inventory, index);
     });
+    //Toggle save button enable / disable depend of the inventoryDetail existance
+    const submitButton = document.querySelector('#submit');
+    if(inventories.length > 0) {
+      submitButton.disabled = false;
+    } else {
+      submitButton.disabled = true;
+    }
   }
 
   // Create row in inventoryDetails table when items in hardware table clicked
@@ -191,4 +198,5 @@ $(document).ready(function() {
   $('#supplier_id').select2({
     placeholder: 'Select Supplier'
   });
+
 });
