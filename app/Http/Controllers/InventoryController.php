@@ -120,11 +120,11 @@ class InventoryController extends Controller
      */
     public function destroy(Inventory $inventory)
     {
-        DB::transaction(function () {
-            DB::update('update users set votes = 1');
-         
-            DB::delete('delete from posts');
-        });
+        $deleted = Inventory::destroy($inventory->id);
+        if($deleted) {
+            InventoryDetail::where('inventory_id', $inventory->id)->delete();
+        }
+        return redirect('/inventory')->with('success', 'Inventory data successfully deleted');
     }
 
     public function inventory_ajax() {

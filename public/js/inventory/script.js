@@ -1,6 +1,3 @@
-// $(document).ready( function () {
-//   $('#inventories').DataTable();
-// });
 // Datatables
 document.addEventListener('DOMContentLoaded', function () {
   let table = new DataTable('#inventories', {
@@ -39,4 +36,4 @@ document.addEventListener('DOMContentLoaded', function () {
 // document.addEventListener('DOMContentLoaded', function () {
 //   let table = new DataTable('#inventories');
 // });
-
+  
