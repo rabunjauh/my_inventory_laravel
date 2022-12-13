@@ -96,22 +96,22 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   
   // Create array inventories
-  const inventories = [];
+  const itemList = [];
 
+  const tbody = document.querySelector('#inventoryDetails tbody');
   function clearItems() {
-    const tbody = document.querySelector('#inventoryDetails tbody');
     while(tbody.firstChild) {
       tbody.removeChild(tbody.firstChild);
     }
   }
 
   function removeItems(index) {
-    inventories.splice(index, 1);
+    itemList.splice(index, 1);
     displayItems();
   }
 
   function addItems(inventory, index) {
-    const tbody = document.querySelector('#inventoryDetails tbody');
+    // const tbody = document.querySelector('#inventoryDetails tbody');
       const tr = tbody.insertRow();
       tr.classList.add('trItemDetail');
       const tdNo = tr.insertCell();
@@ -165,12 +165,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function displayItems() {
     clearItems();
-    inventories.forEach((inventory, index) => {
+    itemList.forEach((inventory, index) => {
       addItems(inventory, index);
     });
+    
     //Toggle save button enable / disable depend of the inventoryDetail existance
     const submitButton = document.querySelector('#submit');
-    if(inventories.length > 0) {
+    if(itemList.length > 0) {
       submitButton.disabled = false;
     } else {
       submitButton.disabled = true;
@@ -187,9 +188,10 @@ document.addEventListener('DOMContentLoaded', function () {
         serialNumber: table.row(event.target).data().serial_number,
         quantity: 1
       }
-      inventories.push(data);
+      itemList.push(data);
       displayItems();
     });
+
 });
 
 // Select2 drop down supplier
@@ -200,3 +202,4 @@ $(document).ready(function() {
   });
 
 });
+  

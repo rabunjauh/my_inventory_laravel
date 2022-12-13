@@ -158,5 +158,5 @@
 @endsection
 
 @push('script')
-  <script src="{{ URL::asset('js/inventory/script.js') }}"></script>
+  <script src="{{ URL::asset('js/inventory/create.js') }}"></script>
 @endpush
