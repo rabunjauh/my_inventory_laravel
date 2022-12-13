@@ -19,7 +19,7 @@
         <div class="row mb-2">
         <div class="col-lg-5">
           <a href="/inventory/create" class="btn btn-primary">
-            Add Inventory</a>
+            Inventory In</a>
           </div>
         </div>
         

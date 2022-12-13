@@ -10,8 +10,10 @@
     </div>
     @endif
   </div>
-  <form action="/inventory" method="post">
+  <form action="/inventory/{{ $inventory->id }}" method="post">
+    @method('put')
     @csrf
+    <input type="hidden" class="form-control" id="inventory_id" name="inventory_id" value="{{ $inventory->id }}">
   <div class="row">
     <h1>{{ $title }}</h1> 
   </div>
@@ -19,7 +21,7 @@
     <div class="col-lg-5">
       <div class="mb-3">
         <label for="type" class="form-label">Inventory Date</label>
-        <input type="text" class="form-control @error('inventory_date')is-invalid @enderror" id="inventory_date" name="inventory_date" value="{{ old('inventory_date') }}" placeholder="YYYY-MM-DD" autofocus required>
+        <input type="text" class="form-control @error('inventory_date')is-invalid @enderror" id="inventory_date" name="inventory_date" value="{{ old('inventory_date', $inventory->inventory_date) }}" placeholder="YYYY-MM-DD" autofocus required>
         @error('inventory_date')
         <div class="invalid-feedback">
           {{ $message }}
@@ -31,15 +33,15 @@
         <label for="supplier_id" class="form-label">Supplier</label>
         <select class="form-control @error('supplier_id')is-invalid @enderror" id="supplier_id" name="supplier_id" required>
           @foreach($suppliers as $supplier)
-            <option></option>
-            <option value="{{ $supplier->id }}" {{ old('supplier_id') == $supplier->id ? 'selected' : '' }}>{{ $supplier->name }}</option>
+            {{-- <option></option> --}}
+            <option value="{{ $supplier->id }}" {{ old('supplier_id', $supplier->supplier_id) == $supplier->id ? 'selected' : '' }}>{{ $supplier->name }}</option>
           @endforeach
         </select>
       </div>
       
       <div class="mb-3">
         <label for="remark" class="form-label">Remark</label>
-        <textarea class="form-control" id="remark" name="remark" rows="3">{{ old('remark') }}</textarea>
+        <textarea class="form-control" id="remark" name="remark" rows="3">{{ old('remark', $inventory->remark) }}</textarea>
       </div>
       @error('remark')
         <div class="invalid-feedback">
@@ -51,7 +53,7 @@
     <div class="col-lg-5">
       <div class="mb-3">
         <label for="do_date" class="form-label">DO Date</label>
-        <input type="text" class="form-control @error('do_date')is-invalid @enderror" id="do_date" name="do_date" value="{{ old('do_date') }}" placeholder="YYYY-MM-DD" required>
+        <input type="text" class="form-control @error('do_date')is-invalid @enderror" id="do_date" name="do_date" value="{{ old('do_date', $inventory->do_date) }}" placeholder="YYYY-MM-DD" required>
         @error('do_date')
         <div class="invalid-feedback">
           {{ $message }}
@@ -61,7 +63,7 @@
       
       <div class="mb-3">
         <label for="do_no" class="form-label">DO Number</label>
-        <input type="text" class="form-control @error('do_no')is-invalid @enderror" id="do_no" name="do_no" value="{{ old('do_no') }}" placeholder="DO No" required>
+        <input type="text" class="form-control @error('do_no')is-invalid @enderror" id="do_no" name="do_no" value="{{ old('do_no', $inventory->do_no) }}" placeholder="DO No" required>
         @error('do_no')
         <div class="invalid-feedback">
           {{ $message }}
@@ -158,5 +160,6 @@
 @endsection
 
 @push('script')
-  <script src="{{ URL::asset('js/inventory/script.js') }}"></script>
+{{-- <script src="{{ URL::asset('js/inventory/script.js') }}"></script> --}}
+<script src="{{ URL::asset('js/inventory/edit.js') }}"></script>
 @endpush

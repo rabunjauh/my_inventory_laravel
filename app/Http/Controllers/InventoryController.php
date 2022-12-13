@@ -97,7 +97,11 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
-        //
+        return view('inventory/edit', [
+            "title" => "Edit Inventory",
+            "suppliers" => Supplier::all(),
+            "inventory" => $inventory
+        ]);
     }
 
     /**

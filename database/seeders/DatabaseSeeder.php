@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
             "code" => "1",
             "hardware_category_id" => 1,
             "name" => "Dell Optiplex 5080",
-            "manufacturer_id" => 1,
+            "manufacturer_id" => 3,
             "serial_number" => "dafasdf",
             "status" => 1,
             // "warranty_start" => "",
@@ -84,8 +84,8 @@ class DatabaseSeeder extends Seeder
         Hardware::create([
             "code" => "2",
             "hardware_category_id" => 1,
-            "name" => "Dell Optiplex 5080",
-            "manufacturer_id" => 1,
+            "name" => "Dell Latitude 5411",
+            "manufacturer_id" => 3,
             "serial_number" => "ffeeefds",
             "status" => 1,
             // "warranty_start" => "",
@@ -95,8 +95,8 @@ class DatabaseSeeder extends Seeder
             "image_format" => "jpg",
             "remark" => "",
             "service_code" => "fedss",
-            "hardware_type_id" => 1,
-            "hardware_model_id" => 1,
+            "hardware_type_id" => 2,
+            "hardware_model_id" => 2,
             "processor_id" => 1,
             "memory_id" => 1,
             "graphic_card_id" => 1,
@@ -144,9 +144,19 @@ class DatabaseSeeder extends Seeder
             "name" => "Optiplex 5080",
             "manufacturer_id" => 2,            
         ]);
+        
+        HardwareModel::create([
+            "name" => "Latitude 5411",
+            "manufacturer_id" => 2,            
+        ]);
 
         HardwareType::create([
             "name" => "Desktop"
+        ]);
+        
+        
+        HardwareType::create([
+            "name" => "Laptop"
         ]);
 
         Memory::create([
