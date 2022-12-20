@@ -211,6 +211,7 @@ document
       serialNumber: table.row(event.target).data().serial_number,
       quantity: 1
     }
+    console.log(data.id);
     itemList.push(data);
     displayItems();
   });
