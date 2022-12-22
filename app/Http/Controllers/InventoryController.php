@@ -70,23 +70,25 @@ class InventoryController extends Controller
                     $create['quantity'] =$validatedInventoryDetails['quantity'][$i]; 
                     $inventoryDetail = InventoryDetail::create($create);
                     if($inventoryDetail) {
-                        $stocks = ItemStock::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->get();
-                        $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
-                        $updateStock['stock'] = $validatedInventoryDetails['quantity'][$i];
-                        if($stocks) {
-                            foreach($stocks as $stock) {
+                        $stock = ItemStock::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->first();
+                        if($stock) {
+                                $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
                                 $updateStock['stock'] = $stock->stock + $validatedInventoryDetails['quantity'][$i];
-                                ItemStock::where('hardware_id', $updateStock['hardware_id'])->update($updateStock);
-                            }
+                                var_dump($updateStock);
+                                ItemStock::where('hardware_id', $stock->hardware_id)->update($updateStock);
+                        } else {
+                            $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
+                            $updateStock['stock'] = $validatedInventoryDetails['quantity'][$i];
+                            var_dump("tes");
+                            ItemStock::create($updateStock);
                         }
-                        ItemStock::create($updateStock);
                     }
                 }
                 return redirect('/inventory')->with('success', 'Inventory data successfully updated');
             } else {
                 return redirect('/inventory/create')->with('failed', 'At least 1 item must be selected!');
             }
-          }
+        }
     }
 
     /**
@@ -143,21 +145,57 @@ class InventoryController extends Controller
         $updateInventory = Inventory::where('id', $inventory->id)->update($validatedInventory);
         if($updateInventory) {
             $inventoryDetails = InventoryDetail::where('inventory_id', $inventory->id)->get(['id']);
-                for($i = 0; $i < count($validatedInventoryDetails['hardware_id']); $i++) {
-                    $exist = InventoryDetail::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->first();
-                    if($exist) {
-                        InventoryDetail::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->update(['quantity' => $validatedInventoryDetails['quantity'][$i]]);
-                    } else {
-                        $create['inventory_id'] = $inventory->id;
-                        $create['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
-                        $create['quantity'] =$validatedInventoryDetails['quantity'][$i];
-                        InventoryDetail::create($create);
+            for($i = 0; $i < count($validatedInventoryDetails['hardware_id']); $i++) {
+                $exist = InventoryDetail::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->first();
+                if($exist) {
+                    $inventoryDetailUpdate = InventoryDetail::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])
+                                                                ->where('inventory_id', $inventory->id)
+                                                                ->update(['quantity' => $validatedInventoryDetails['quantity'][$i]]);
+                    if($inventoryDetailUpdate) {
+                        $stocks = ItemStock::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->get();
+                        $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
+                        $updateStock['stock'] = $validatedInventoryDetails['quantity'][$i];
+                        if($stocks) {
+                            foreach($stocks as $stock) {
+                                $updateStock['stock'] = $stock->stock + $validatedInventoryDetails['quantity'][$i];
+                                ItemStock::where('hardware_id', $updateStock['hardware_id'])->update($updateStock);
+                            }
+                        }
+                        ItemStock::create($updateStock);
+                    }
+                } else {
+                    $create['inventory_id'] = $inventory->id;
+                    $create['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
+                    $create['quantity'] =$validatedInventoryDetails['quantity'][$i];
+                    $inventoryDetail = InventoryDetail::create($create);
+                    if($inventoryDetail) {
+                        $stocks = ItemStock::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->get();
+                        $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
+                        $updateStock['stock'] = $validatedInventoryDetails['quantity'][$i];
+                        if($stocks) {
+                            foreach($stocks as $stock) {
+                                $updateStock['stock'] = $stock->stock + $validatedInventoryDetails['quantity'][$i];
+                                ItemStock::where('hardware_id', $updateStock['hardware_id'])->update($updateStock);
+                            }
+                        }
+                        ItemStock::create($updateStock);
                     }
                 }
+
+
+            }
+
             $deleteInventoryDetails = InventoryDetail::whereNotIn('hardware_id', $validatedInventoryDetails['hardware_id'])->get();
             var_dump($deleteInventoryDetails);
             if($deleteInventoryDetails){
                 foreach($deleteInventoryDetails as $deleteInventoryDetail) {
+                    $stocks = ItemStock::where('hardware_id', $deleteInventoryDetail->hardware_id)->get();
+                    if($stocks) {
+                        foreach($stocks as $stock) {
+                            $updateStock['stock'] = $stock->stock + $deleteInventoryDetail->quantity;
+                            ItemStock::where('hardware_id', $updateStock['hardware_id'])->update($updateStock);
+                        }
+                    }
                     InventoryDetail::where('hardware_id', $deleteInventoryDetail->hardware_id)->delete();
                 }
             }
