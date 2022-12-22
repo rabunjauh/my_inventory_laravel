@@ -71,7 +71,6 @@ class InventoryController extends Controller
                     $inventoryDetail = InventoryDetail::create($create);
                     if($inventoryDetail) {
                         $stocks = ItemStock::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->get();
-                        // var_dump($stocks);
                         $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
                         $updateStock['stock'] = $validatedInventoryDetails['quantity'][$i];
                         if($stocks) {
@@ -128,7 +127,6 @@ class InventoryController extends Controller
      */
     public function update(Request $request, Inventory $inventory)
     {
-        // dd($request);
         $validatedInventory = $request->validate([
             'do_date' => 'required|date',
             'do_no' => 'required|numeric',
@@ -141,54 +139,22 @@ class InventoryController extends Controller
             'hardware_id.*' => 'required|numeric',
             'quantity.*' => 'required|numeric'
         ]);
-        // echo "validatedInventoryDetails1";
-        // echo "<br>";
-        // var_dump($validatedInventoryDetails['hardware_id']);
-        // die;
-        // echo "<br>";
 
         $updateInventory = Inventory::where('id', $inventory->id)->update($validatedInventory);
         if($updateInventory) {
-            // $items = $request->input('hardware_id');
-            // var_dump($items);
-            // $quantity = $request->input('quantity');
             $inventoryDetails = InventoryDetail::where('inventory_id', $inventory->id)->get(['id']);
-            // $InventoryDetailsIds = [];
-            // foreach($inventoryDetails as $inventoryDetail) {
-            //     array_push($InventoryDetailsIds, $inventoryDetail->id);
-            // }
-            // if(count($items) >= count($inventoryDetails)) {
                 for($i = 0; $i < count($validatedInventoryDetails['hardware_id']); $i++) {
-                    // echo $items[$i];
-                    // echo "<br>";
-                    // for($j = 0; $j < count($inventoryDetails); $j++) {
-                    //     if($items[$i] == $inventoryDetails[$j]->id) {
-                    //         InventoryDetail::where('id', $inventoryDetails[$j]->id)->update(['quantity' => $quantity[$i]]);
-                    //     }                            
-                    // }
                     $exist = InventoryDetail::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->first();
                     if($exist) {
-                        // for($j = 0; $j < count($inventoryDetails); $j++) {
-                        //     if($items[$i] == $inventoryDetails[$j]->id) {
-                        //         InventoryDetail::where('id', $inventoryDetails[$j]->id)->update(['quantity' => $quantity[$i]]);
-                        //     }                            
-                        // }
-                        
-                                InventoryDetail::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->update(['quantity' => $validatedInventoryDetails['quantity'][$i]]);
-                        echo $validatedInventoryDetails['hardware_id'][$i] . "is exist <br>";
+                        InventoryDetail::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->update(['quantity' => $validatedInventoryDetails['quantity'][$i]]);
                     } else {
-                        // echo $validatedInventoryDetails['hardware_id'][$i] . "is not exist <br>";
                         $create['inventory_id'] = $inventory->id;
                         $create['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
                         $create['quantity'] =$validatedInventoryDetails['quantity'][$i];
-                        // echo "validatedInventoryDetails2";
-                        // echo "<br>";
                         var_dump($create);
-                        // echo "<br>";
                         InventoryDetail::create($create);
                     }
                 }
-            // } 
             $deleteInventoryDetails = InventoryDetail::whereNotIn('hardware_id', $validatedInventoryDetails['hardware_id'])->get();
             var_dump($deleteInventoryDetails);
             if($deleteInventoryDetails){
@@ -196,170 +162,6 @@ class InventoryController extends Controller
                     InventoryDetail::where('hardware_id', $deleteInventoryDetail->hardware_id)->delete();
                 }
             }
-
-            // echo "<br>";
-            // var_dump($InventoryDetailsIds);
-            // echo "<br>";
-            // var_dump($items);
-            // echo "<br>";
-            // var_dump($inventoryDetails);
-            // echo "<br>";
-
-            // var_dump(array_diff($items, $inventoryDetails));
-            // for($i = 0; $i < count($items); $i++) {
-            //     echo "i:" . $i . "<br>";
-            //     for($j = 0; $j < count($inventoryDetails); $j++) {
-            //         echo "j:" . $j;
-            //         // var_dump($inventoryDetails[$j]);
-            //         if($items[$i] == $inventoryDetails[$j]['id']) {
-            //             // InventoryDetail::where('id', $inventoryDetails[$j]->id)->update(['quantity' => $quantity[$i]]);
-            //             // echo "items id" . $items[$i] . " " . $i . " & inventoryDetails id" . $inventoryDetails[$j]['id'] . " " . $j . " is identical </br>";
-            //         } else {
-            //         }
-            //     }
-            //     echo "<br>";
-            //     if(count($items) > count($inventoryDetails)) {
-                    
-            //     }
-            //     // if(count($items) > count($inventoryDetails)) {
-            //     //     echo $items[$i] . "inserted";
-            //     //     // $validatedInventoryDetails[$i]['hardware_id'] = $items[$i];
-            //     //     // $validatedInventoryDetails[$i]['']
-            //     //     // InventoryDetail::create()
-            //     // }
-            //     // InventoryDetail::whereNotIn('id', $items)->delete();
-            // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // if(count($items) >= count($inventoryDetails)) {
-                // foreach($items as $itemKey => $item) {
-                //     foreach($inventoryDetails as $inventoryDetailsKey => $inventoryDetail) {
-                //         if($item == $inventoryDetail->id){
-                //             // InventoryDetail::where('id', $inventoryDetail->id)->update(['quantity' => $quantity[$itemKey]]);
-                //             echo "items id" . $item . " " . $itemKey . " & inventoryDetails id" . $inventoryDetail['id'] . " " . $inventoryDetailsKey . " is identical </br>";
-                //         }
-                //             echo "items id" . $item . " " . $itemKey . " & inventoryDetails id" . $inventoryDetail['id'] . " " . $inventoryDetailsKey . " is not identical </br>";
-                //         // InventoryDetail::create();
-                //     }
-                //     echo "<br>";
-                //     // var_dump($item);
-                //     echo "<br>";
-                //     // $tes = InventoryDetail::where('id', $item)->get();
-                //     // if(!$tes){
-                //     //     echo $item . " tidak ada di dalam table inventory Detail";
-                //     // }
-                //     // $tes = InventoryDetail::where('id', $items)->get();
-                //     //         if(count($tes) <= 0){
-                //     //             echo " tidak ada di dalam table inventory Detail";
-                //     //         } else {
-                //     //             echo "tes";
-                //     //         }
-                // }
-                // InventoryDetail::whereNotIn('id', $items)->delete();
-            // }
-
-                // $items = $request->input('hardware_id')[0];
-                // $inventoryDetails = InventoryDetail::where('inventory_id', $inventory->id)->get();
-                // foreach($inventoryDetails as $inventoryDetail) {
-                //     if($items == $inventoryDetail->id) {
-                //         InventoryDetail::where('id', $inventoryDetail->id)->update(['quantity' => 1]);
-                //     } else {
-                //         InventoryDetail::destroy($inventoryDetail->id);
-                //     }
-                // }
-
-                            // echo $items = $request->input('hardware_id')[0];
-                            // $inventoryDetails = InventoryDetail::where('inventory_id', $inventory->id)->get();
-                            // foreach($inventoryDetails as $inventoryDetail) {
-                            //     if($items == $inventoryDetail->id) {
-                            //         InventoryDetail::where('id', $inventoryDetail->id)->update(['quantity' => 1]);
-                            //     } else {
-                            //         InventoryDetail::destroy($inventoryDetail->id);
-                            //     }
-                            // }
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //     if($items){
-        //         if(count($items) < count($inventoryDetail) || count($items) == count($inventoryDetail)) {
-        //             foreach($items as $key => $currentItem){
-        //                 echo $items[$key];
-        //                 $prevInventoryDetail = InventoryDetail::where('hardware_id', $items[$key])->get();
-        //                 var_dump($prevInventoryDetail);
-        //                 // if(!$prevInventoryDetail) {
-        //                 //    $currentItem->name
-        //                 // } else {
-        //                 //     echo "exist";
-        //                 // }
-        //                 // foreach($prevInventoryDetail as $item) {
-        //                 //     $itemExist = InventoryDetail::where('id', $item->id)->first();
-        //                 //     if(!$itemExist){
-        //                         // echo "not exist";
-        //                     //     $validatedInventoryDetails['inventory_id'] = $inventory->id;
-        //                     //     $validatedInventoryDetails['hardware_id'] = $request->input('hardware_id')[$key];
-        //                     //     $validatedInventoryDetails['quantity'] = $request->input('quantity')[$key];
-        //                     //     InventoryDetail::create($validatedInventoryDetails);
-        //                     // } else {
-        //                         // echo "exist";
-        //                     // }
-        //                 // }
-        //             }
-        //         } else {
-                
-        //         }    
-        //     } else {
-        //         // return redirect('/inventory/create')->with('failed', 'At least 1 item must be selected!');
-        //     }
-            
-                
-        //         die;
-        //         for($i = 0; $i < count($request->input('hardware_id')); $i++) {
-        //             $validatedInventoryDetails['inventory_id'] = $inventory->id;
-        //             $validatedInventoryDetails['hardware_id'] = $request->input('hardware_id')[$i];
-        //             $validatedInventoryDetails['quantity'] = $request->input('quantity')[$i];
-        //             var_dump($validatedInventoryDetails);
-        //             // InventoryDetail::where('inventory_id', $inventory->id)->update($validatedInventoryDetails);
-        //         }
-        //         // return redirect('/inventory')->with('success', 'Inventory data successfully updated');
-        // return redirect('/inventory');   
         }
     }
 
