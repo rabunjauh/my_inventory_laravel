@@ -27,10 +27,6 @@ class Hardware extends Model
         return $this->belongsTo(HardwareType::class);
     }
 
-    public function inventoryDetail() {
-        return $this->hasMany(InventoryDetail::class);
-    }
-
     public function manufacturer() {
         return $this->belongsTo(Manufacturer::class);
     }
@@ -45,6 +41,14 @@ class Hardware extends Model
     
     public function storage() {
         return $this->belongsTo(Storage::class);
+    }
+
+    public function inventoryDetail() {
+        return $this->hasMany(InventoryDetail::class);
+    }
+
+    public function itemStock() {
+        return $this->hasMany(itemStock::class);
     }
 }
  

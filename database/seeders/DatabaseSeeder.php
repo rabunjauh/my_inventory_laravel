@@ -12,6 +12,7 @@ use App\Models\Hardware;
 use App\Models\HardwareCategory;
 use App\Models\HardwareModel;
 use App\Models\HardwareType;
+use App\Models\itemStock;
 use App\Models\Manufacturer;
 use App\Models\Memory;
 use App\Models\Processor;
@@ -298,6 +299,11 @@ class DatabaseSeeder extends Seeder
             "core" => 6,
             "frequency" => "2.70 GHz",
             "memory_support" => "DDR4-2933"
+        ]);
+
+        itemStock::create([
+            "hardware_id"  => 1,
+            "stock" => 1
         ]);
     }
 }

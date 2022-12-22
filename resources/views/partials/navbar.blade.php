@@ -60,7 +60,7 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item {{ Request::is('inventory') ? 'active' : '' }}" href="/inventory">Inventory</a></li>
               <li><a class="dropdown-item {{ Request::is('/') ? 'active' : '' }}" href="/hardware">Hardware</a></li>
-              <li><a class="dropdown-item {{ Request::is('hardwareCategory') ? 'active' : '' }}" href="/hardwareCategory">Hardware Category</a></li>
+              <li><a class="dropdown-item {{ Request::is('itemStock') ? 'active' : '' }}" href="/itemStock">Item Stock</a></li>
               <li><a class="dropdown-item {{ Request::is('hardwareModel') ? 'active' : '' }}" href="/hardwareModel">Hardware Model</a></li>
               <li><a class="dropdown-item {{ Request::is('hardwareType') ? 'active' : '' }}" href="/hardwareType">Hardware Type</a></li>
               <li><a class="dropdown-item {{ Request::is('manufacturer') ? 'active' : '' }}" href="/manufacturer">Manufacturer</a></li>

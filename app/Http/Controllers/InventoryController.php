@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Hardware;
 use App\Models\Inventory;
 use App\Models\InventoryDetail;
+use App\Models\itemStock;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;                        
@@ -56,24 +57,37 @@ class InventoryController extends Controller
 
         $validatedInventoryDetails = $request->validate([
             'inventory_id.*' => 'required|numeric', 
-            'hardware_id.*' => 'required|numeric|distinct',
-            'quantity.*' => 'required|numeric|distinct'
+            'hardware_id.*' => 'required|numeric',
+            'quantity.*' => 'required|numeric'
         ]);
 
         $inventory = Inventory::create($validatedInventory);
         if($inventory) {
             if($request->input('hardware_id')){
                 for($i = 0; $i < count($request->input('hardware_id')); $i++) {
-                    $validatedInventoryDetails['inventory_id'] = $inventory->id;
-                    $validatedInventoryDetails['hardware_id'] = $request->input('hardware_id')[$i];
-                    $validatedInventoryDetails['quantity'] = $request->input('quantity')[$i];
-                    InventoryDetail::create($validatedInventoryDetails);
+                    $create['inventory_id'] = $inventory->id;
+                    $create['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
+                    $create['quantity'] =$validatedInventoryDetails['quantity'][$i]; 
+                    $inventoryDetail = InventoryDetail::create($create);
+                    if($inventoryDetail) {
+                        $stocks = ItemStock::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->get();
+                        // var_dump($stocks);
+                        $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
+                        $updateStock['stock'] = $validatedInventoryDetails['quantity'][$i];
+                        if($stocks) {
+                            foreach($stocks as $stock) {
+                                $updateStock['stock'] = $stock->stock + $validatedInventoryDetails['quantity'][$i];
+                                ItemStock::where('hardware_id', $updateStock['hardware_id'])->update($updateStock);
+                            }
+                        }
+                        ItemStock::create($updateStock);
+                    }
                 }
                 return redirect('/inventory')->with('success', 'Inventory data successfully updated');
             } else {
                 return redirect('/inventory/create')->with('failed', 'At least 1 item must be selected!');
             }
-        }
+          }
     }
 
     /**
