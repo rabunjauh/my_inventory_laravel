@@ -151,7 +151,6 @@ class InventoryController extends Controller
                         $create['inventory_id'] = $inventory->id;
                         $create['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
                         $create['quantity'] =$validatedInventoryDetails['quantity'][$i];
-                        var_dump($create);
                         InventoryDetail::create($create);
                     }
                 }
