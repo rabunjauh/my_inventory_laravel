@@ -303,7 +303,12 @@ class DatabaseSeeder extends Seeder
 
         itemStock::create([
             "hardware_id"  => 1,
-            "stock" => 1
+            "stock" => 10
+        ]);
+        
+        itemStock::create([
+            "hardware_id"  => 2,
+            "stock" => 5
         ]);
     }
 }
