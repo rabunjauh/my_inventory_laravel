@@ -95,21 +95,25 @@ document.addEventListener('DOMContentLoaded', function () {
     "bScrollCollapse": true
   });
   
-  // Create array inventories
+  // Create array itemList
   const itemList = [];
-
+  // get table invetoryDetails tbody
   const tbody = document.querySelector('#inventoryDetails tbody');
+
+  // prevent duplicate data showing in item list
   function clearItems() {
     while(tbody.firstChild) {
       tbody.removeChild(tbody.firstChild);
     }
   }
 
+  // remove item from list
   function removeItems(index) {
     itemList.splice(index, 1);
     displayItems();
   }
 
+  // create element for item list
   function addItems(inventory, index) {
     // const tbody = document.querySelector('#inventoryDetails tbody');
       const tr = tbody.insertRow();
@@ -163,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
       tr.appendChild(tdAction);
   }
 
+  // display element
   function displayItems() {
     clearItems();
     itemList.forEach((inventory, index) => {
@@ -188,6 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
         serialNumber: table.row(event.target).data().serial_number,
         quantity: 1
       }
+      // add item validation for prevent duplicate hardware added to item list
       if(!itemList.find(({id}) => id === data.id)) {
         itemList.push(data);
       } else {
@@ -204,6 +210,5 @@ $(document).ready(function() {
   $('#supplier_id').select2({
     placeholder: 'Select Supplier'
   });
-
 });
   

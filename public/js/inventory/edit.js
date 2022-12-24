@@ -215,6 +215,7 @@ document
       serialNumber: table.row(event.target).data().serial_number,
       quantity: 1
     }
+    // add item validation for prevent duplicate hardware added to item list
     if(!itemList.find(({id}) => id === data.id)) {
       itemList.push(data);
     } else {
