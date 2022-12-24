@@ -1,8 +1,11 @@
+{{-- call layouts.main --}}
 @extends('layouts.main')
 
+{{-- send to layouts.main yield --}}
 @section('container')
     <div class="container mt-3">
       <div class="row">
+        {{-- alert notification --}}
         @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           {{ session('success') }}
