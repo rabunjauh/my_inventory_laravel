@@ -11,7 +11,7 @@ window.addEventListener('load', async function() {
   
   inventoryItems.forEach(inventoryItem => {
     const data = {
-      id: inventoryItem.id,
+      id: inventoryItem.hardware_id,
       name: inventoryItem.hardware.name,
       serialNumber: inventoryItem.hardware.serial_number,
       quantity: inventoryItem.quantity
@@ -211,8 +211,11 @@ document
       serialNumber: table.row(event.target).data().serial_number,
       quantity: 1
     }
-    console.log(data.id);
-    itemList.push(data);
+    if(!itemList.find(({id}) => id === data.id)) {
+      itemList.push(data);
+    } else {
+      alert('Selected item is already in the list!');
+    }
     displayItems();
   });
 

@@ -188,7 +188,11 @@ document.addEventListener('DOMContentLoaded', function () {
         serialNumber: table.row(event.target).data().serial_number,
         quantity: 1
       }
-      itemList.push(data);
+      if(!itemList.find(({id}) => id === data.id)) {
+        itemList.push(data);
+      } else {
+        alert('Selected item is already in the list!');
+      }
       displayItems();
     });
 
