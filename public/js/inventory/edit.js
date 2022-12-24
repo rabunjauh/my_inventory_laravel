@@ -4,7 +4,7 @@ const tbody = document.querySelector('#inventoryDetails tbody');
 // Create array 
 const itemList = [];
 
-// get and show data from table to itemList
+// get and show data from table to itemList use async await
 window.addEventListener('load', async function() {
   const inventory_id = document.getElementById('inventory_id').value;
   const inventoryItems = await getInventoryItems(inventory_id);
@@ -33,7 +33,7 @@ function displayItems() {
     addItems(item, index);
   });
 
-  //Toggle save button enable / disable depend of the inventoryDetail existance
+  //Toggle save button enable / disable depend of the inventoryDetail existence
   const submitButton = document.querySelector('#submit');
   if(itemList.length > 0) {
     submitButton.disabled = false;
@@ -42,6 +42,7 @@ function displayItems() {
   }
 }
 
+// create element for item list
 function addItems(item, index) {
   const tr = tbody.insertRow();
     tr.classList.add('trItemDetail');
@@ -94,17 +95,20 @@ function addItems(item, index) {
     tr.appendChild(tdAction);
 }
 
+// remove data in array object itemList then show again to item list
 function removeItems(index) {
   itemList.splice(index, 1);
   displayItems();
 }
 
+// remove duplicate showing item in item list
 function clearItems() {
   while(tbody.firstChild) {
     tbody.removeChild(tbody.firstChild);
   }
 }
 
+// Datatables for Hardware list inside modal
 // document.addEventListener('DOMContentLoaded', function () {
 let table = new DataTable('#hardwares', {
   processing: true,

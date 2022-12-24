@@ -47,7 +47,6 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-
         $validatedInventory = $request->validate([
             'do_date' => 'required|date',
             'do_no' => 'required|numeric',
@@ -61,24 +60,35 @@ class InventoryController extends Controller
             'quantity.*' => 'required|numeric'
         ]);
 
+        // get inventory insert result
         $inventory = Inventory::create($validatedInventory);
+        // if the result is true
         if($inventory) {
+            // if data from form is true
             if($request->input('hardware_id')){
+                // loop as form input quantity
                 for($i = 0; $i < count($request->input('hardware_id')); $i++) {
+                    // init input data to $create
                     $create['inventory_id'] = $inventory->id;
                     $create['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
                     $create['quantity'] =$validatedInventoryDetails['quantity'][$i]; 
+                    // insert to inventory_details and get the result
                     $inventoryDetail = InventoryDetail::create($create);
+                    // if the result is true
                     if($inventoryDetail) {
+                        // get from item_stocks result
                         $stock = ItemStock::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->first();
+                        // if the result is true
                         if($stock) {
                                 $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
                                 $updateStock['stock'] = $stock->stock + $validatedInventoryDetails['quantity'][$i];
+                                // update quantity of existing data in item_stocks with quantity from input form 
                                 ItemStock::where('hardware_id', $stock->hardware_id)->update($updateStock);
+                        // if the result is false 
                         } else {
                             $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
                             $updateStock['stock'] = $validatedInventoryDetails['quantity'][$i];
-                            var_dump("tes");
+                            // insert new data from input form
                             ItemStock::create($updateStock);
                         }
                     }
