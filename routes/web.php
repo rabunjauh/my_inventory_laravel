@@ -42,6 +42,7 @@ Route::get('/hardware/hardware_by_id/{id}', [HardwareController::class, 'hardwar
 Route::resource('/hardwareModel', HardwareModelController::class);
 Route::resource('/hardwareType', HardwareTypeController::class);
 Route::get('/inventory/inventoryDetailJson/{id}', [InventoryController::class, 'inventoryDetailAjax'])->name('inventoryDetailAjax');
+Route::get('/inventory/inventoryDetailJsonByHardwareId/{id}', [InventoryController::class, 'inventoryDetailAjaxByHardwareId'])->name('inventoryDetailAjaxByHardwareId');
 Route::get('/inventory/json', [InventoryController::class, 'inventory_ajax'])->name('inventory_ajax');
 // Route::get('/inventory/inventoryDetailJson', [InventoryController::class, 'inventoryDetailAjax'])->name('inventoryDetailAjax');
 Route::resource('/inventory', InventoryController::class);

@@ -211,6 +211,7 @@ document
   .addEventListener('click', function(event) {
     const data = {
       id: table.row(event.target).data().id,
+      category: table.row(event.target).data().hardware_category.name,
       name: table.row(event.target).data().name,
       serialNumber: table.row(event.target).data().serial_number,
       quantity: 1

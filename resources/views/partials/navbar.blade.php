@@ -40,7 +40,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item {{ Request::is('graphicCard') ? 'active' : '' }}" href="/graphicCard">Graphic Card</a></li>
-              <li><a class="dropdown-item {{ Request::is('/') ? 'active' : '' }}" href="/hardware">Hardware</a></li>
+              <li><a class="dropdown-item {{ Request::is('/') ? 'active' : '' }}" href="/">Hardware</a></li>
               <li><a class="dropdown-item {{ Request::is('hardwareCategory') ? 'active' : '' }}" href="/hardwareCategory">Hardware Category</a></li>
               <li><a class="dropdown-item {{ Request::is('hardwareModel') ? 'active' : '' }}" href="/hardwareModel">Hardware Model</a></li>
               <li><a class="dropdown-item {{ Request::is('hardwareType') ? 'active' : '' }}" href="/hardwareType">Hardware Type</a></li>

@@ -234,13 +234,25 @@ class InventoryController extends Controller
         ->toJson();
     }
 
-    // public function inventoryDetailAjax($inventoryId) {
+    // get inventoryDetailAjax by inventory_id
     public function inventoryDetailAjax($inventoryId) {
         return DataTables::of(InventoryDetail::with([
             'hardware',
             'inventory'
         ])
         ->where('inventory_id', $inventoryId)
+        ->get())
+        ->addIndexColumn()
+        ->toJson();
+    }
+
+    // get inventoryDetailAjax by hardware_id
+    public function inventoryDetailAjaxByHardwareId($hardware_id) {
+        return DataTables::of(InventoryDetail::with([
+            'hardware',
+            'inventory'
+        ])
+        ->where('hardware_id', $hardware_id)
         ->get())
         ->addIndexColumn()
         ->toJson();

@@ -46,13 +46,13 @@ class DatabaseSeeder extends Seeder
         InventoryDetail::create([
             "inventory_id" => 1,
             "hardware_id" => 1,
-            "quantity" => 10,
+            "quantity" => 1,
         ]);
         // 2
         InventoryDetail::create([
             "inventory_id" => 1,
             "hardware_id" => 2,
-            "quantity" => 5,
+            "quantity" => 1,
         ]);
         // 1
         Supplier::create([
@@ -303,12 +303,12 @@ class DatabaseSeeder extends Seeder
 
         itemStock::create([
             "hardware_id"  => 1,
-            "stock" => 10
+            "stock" => 1
         ]);
         
         itemStock::create([
             "hardware_id"  => 2,
-            "stock" => 5
+            "stock" => 1
         ]);
     }
 }

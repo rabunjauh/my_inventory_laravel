@@ -78,7 +78,7 @@ class HardwareController extends Controller
             'hardware_category_id' => 'required',
             'name' => 'required|max:255',
             'manufacturer_id' => 'required|max:255',
-            'serial_number' => 'required|max:255',
+            'serial_number' => 'required|max:255|unique:hardware',
             'status' => 'required',
             // 'warranty_start' => 'nullable',
             // 'warranty_end' => 'nullable',
