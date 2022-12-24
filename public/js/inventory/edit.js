@@ -12,6 +12,7 @@ window.addEventListener('load', async function() {
   inventoryItems.forEach(inventoryItem => {
     const data = {
       id: inventoryItem.hardware_id,
+      category: inventoryItem.hardware.hardware_category_id,
       name: inventoryItem.hardware.name,
       serialNumber: inventoryItem.hardware.serial_number,
       quantity: inventoryItem.quantity
@@ -67,6 +68,9 @@ function addItems(item, index) {
     inputQuantity.maxLength = 11;
     inputQuantity.required = true;
     inputQuantity.value = item.quantity;
+    if(item.category == 'Workstation' || item.category == 1) {
+      inputQuantity.readOnly = true;
+    }
 
     const deleteRowButton = document.createElement('button');
     deleteRowButton.setAttribute('type', 'button');
@@ -208,21 +212,33 @@ let table = new DataTable('#hardwares', {
 // Create row in inventoryDetails table when items in hardware table clicked
 document
   .querySelector('#hardwares tbody')
-  .addEventListener('click', function(event) {
-    const data = {
-      id: table.row(event.target).data().id,
-      category: table.row(event.target).data().hardware_category.name,
-      name: table.row(event.target).data().name,
-      serialNumber: table.row(event.target).data().serial_number,
-      quantity: 1
+  .addEventListener('click', async function(event) {
+    const hardwareId = table.row(event.target).data().id;
+    const inventoryDetailByHardwareId = await getInventoryDetailByHardwareId(hardwareId);
+    function getInventoryDetailByHardwareId(hardwareId) {
+      return fetch('http://127.0.0.1:8000/inventory/inventoryDetailJsonByHardwareId/' + hardwareId)
+              .then(response => response.json())
+              .then(response => response.data);
     }
-    // add item validation for prevent duplicate hardware added to item list
-    if(!itemList.find(({id}) => id === data.id)) {
-      itemList.push(data);
+    // Check if clicked item is already exist in the inventory detail
+    if(inventoryDetailByHardwareId.length > 0) {
+      alert('Selected item is already exist in inventory detail');
     } else {
-      alert('Selected item is already in the list!');
+      const data = {
+        id: table.row(event.target).data().id,
+        category: table.row(event.target).data().hardware_category.name,
+        name: table.row(event.target).data().name,
+        serialNumber: table.row(event.target).data().serial_number,
+        quantity: 1
+      }
+      // add item validation for prevent duplicate hardware added to item list
+      if(!itemList.find(({id}) => id === data.id)) {
+        itemList.push(data);
+      } else {
+        alert('Selected item is already in the list!');
+      }
+      displayItems();
     }
-    displayItems();
   });
 
 // Select2 drop down supplier
