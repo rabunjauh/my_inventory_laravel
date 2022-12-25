@@ -192,16 +192,13 @@ class InventoryController extends Controller
                 }
             }
 
-            $deleteInventoryDetails = InventoryDetail::whereNotIn('hardware_id', $validatedInventoryDetails['hardware_id'])->get();
-            var_dump($deleteInventoryDetails);
+            $deleteInventoryDetails = InventoryDetail::whereNotIn('hardware_id', $validatedInventoryDetails['hardware_id'])->where('inventory_id', $inventory->id)->get();
             if($deleteInventoryDetails){
                 foreach($deleteInventoryDetails as $deleteInventoryDetail) {
-                    $stocks = ItemStock::where('hardware_id', $deleteInventoryDetail->hardware_id)->first();
-                    if($stocks) {
-                        foreach($stocks as $stock) {
-                            $updateStock['stock'] = $stock->stock + $deleteInventoryDetail->quantity;
-                            ItemStock::where('hardware_id', $updateStock['hardware_id'])->update($updateStock);
-                        }
+                    $stock = ItemStock::where('hardware_id', $deleteInventoryDetail->hardware_id)->first();
+                    if($stock) {
+                        $updateStock['stock'] = $stock->stock + $deleteInventoryDetail->quantity;
+                        ItemStock::where('hardware_id', $updateStock['hardware_id'])->update($updateStock);
                     }
                     InventoryDetail::where('hardware_id', $deleteInventoryDetail->hardware_id)->delete();
                 }

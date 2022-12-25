@@ -150,7 +150,7 @@ class DatabaseSeeder extends Seeder
             "storage_id" => 1,
             "computer_name" => "hhttttt"
         ]);
-        // 4
+        // 5
         Hardware::create([
             "code" => "5",
             "hardware_category_id" => 1,
@@ -173,6 +173,8 @@ class DatabaseSeeder extends Seeder
             "storage_id" => 1,
             "computer_name" => "jlk;dfakjds"
         ]);
+
+        // 6
         Hardware::create([
             "code" => "6",
             "hardware_category_id" => 1,
@@ -195,6 +197,7 @@ class DatabaseSeeder extends Seeder
             "storage_id" => 1,
             "computer_name" => "jlk;dfakjds"
         ]);
+
         // 1
         Storage::create([
             "size" => "2.5",
@@ -266,6 +269,11 @@ class DatabaseSeeder extends Seeder
         // 5
         HardwareModel::create([
             "name" => "Optiplex 7000",
+            "manufacturer_id" => 2,            
+        ]);
+        // 6
+        HardwareModel::create([
+            "name" => "H2220",
             "manufacturer_id" => 2,            
         ]);
         // 1
