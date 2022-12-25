@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
       name: 'status',
       render: function(data, type, full, meta) {
         if(data === 1) {
-          return 'Aktive';
+          return 'Active';
         } else {
           return 'Not Active';
         }
