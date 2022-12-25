@@ -150,57 +150,93 @@ class InventoryController extends Controller
             'hardware_id.*' => 'required|numeric',
             'quantity.*' => 'required|numeric'
         ]);
-
+        // get update inventory result
         $updateInventory = Inventory::where('id', $inventory->id)->update($validatedInventory);
+        // if result is true 
         if($updateInventory) {
+            // get column id from inventoryDetails where inventory_id = $inventory_id
             $inventoryDetails = InventoryDetail::where('inventory_id', $inventory->id)->get(['id']);
+            // loop for as many as input form quantity($validatedInventoryDetails)
             for($i = 0; $i < count($validatedInventoryDetails['hardware_id']); $i++) {
+                // get first row from inventoryDetail where hardware_id = hardware_id from input form and assign to $exist variable 
                 $exist = InventoryDetail::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->first();
+                // if exist result is true / available
                 if($exist) {
+                    /* update quantity of inventoryDetail where hardware_id = hardware_id from input form and where 
+                    inventory_id = $inventory->id then get the result and assign into $inventoryDeatilUpdate variable */  
                     $inventoryDetailUpdate = InventoryDetail::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])
                                                                 ->where('inventory_id', $inventory->id)
                                                                 ->update(['quantity' => $validatedInventoryDetails['quantity'][$i]]);
+                    // if $inventoryDeatilUpdate is successfull
                     if($inventoryDetailUpdate) {
+                        // get first row of ItemStock where hardware_id = hardware_id from input form then assign into $stock variable
                         $stock = ItemStock::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->first();
+                        // if $stock is true / available
                         if($stock) {
+                            // assign hardware_id from input form n into $updateStock array
                             $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
+                            /* Subtrack quantity from input form n with quantity from inventory_details table where
+                            hardware_id = hardware_id from input form then add with existing stock from item_stocks 
+                            table where hardware_id = hardware_id from input form then assign into $updateStock array */
                             $updateStock['stock'] = ($validatedInventoryDetails['quantity'][$i] - $exist->quantity) + $stock->stock;
+                            /* update existing row inside item_stocks table where hardware_id = hardware id from input form n with
+                            // value from $updateStock array(from input form n data) */
                             ItemStock::where('hardware_id', $updateStock['hardware_id'])->update($updateStock);
+                        // if $stock is not true / not available
                         } else {
+                            // assign hardware_id & quantity from input form n into $updateStock array
                             $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
                             $updateStock['stock'] = $validatedInventoryDetails['quantity'][$i];
+                            // insert $update stock array to new row in item_stocks table
                             ItemStock::create($updateStock);
                         }
                     }
+                // if $exist result is false / not available
                 } else {
+                    // assign $inventory->id, hardware_id & quantity from input from n to $create array
                     $create['inventory_id'] = $inventory->id;
                     $create['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
                     $create['quantity'] =$validatedInventoryDetails['quantity'][$i];
+                    // insert new $create array to new row in inventory_details table get insert result then assign into $inventoryDetail variable
                     $inventoryDetail = InventoryDetail::create($create);
+                    // if insert new row in inventory_details table success
                     if($inventoryDetail) {
+                        // get first row from item_stock table where hardware_id = hardware_id from input form n then assign to $stock variable
                         $stock = ItemStock::where('hardware_id', $validatedInventoryDetails['hardware_id'][$i])->first();
+                        // if $stock result is true / available
                         if($stock) {
-                                $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
-                                $updateStock['stock'] = $stock->stock + $validatedInventoryDetails['quantity'][$i];
-                                ItemStock::where('hardware_id', $stock->hardware_id)->update($updateStock);
+                            // assign hardware_id from input form n into $updateStock array
+                            $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
+                            // add existing stock from item_stocks table with quantity from input form n then assign into $updateStock array
+                            $updateStock['stock'] = $stock->stock + $validatedInventoryDetails['quantity'][$i];
+                            /* update existing row inside item_stocks table where hardware_id = hardware id from input form n with
+                            // value from $updateStock array(from input form n data) */
+                            ItemStock::where('hardware_id', $stock->hardware_id)->update($updateStock);
+                        // if $stock result is false / not available
                         } else {
+                            // assign hardware_id & quantity from input form n into $updateStock array
                             $updateStock['hardware_id'] = $validatedInventoryDetails['hardware_id'][$i];
                             $updateStock['stock'] = $validatedInventoryDetails['quantity'][$i];
+                            // insert $update stock array to new row in item_stocks table
                             ItemStock::create($updateStock);
                         }
                     }
                 }
             }
-
+            /* Delete * from inventory_details table where hardware_id != $validatedInventoryDetails array of hardware_id and
+            inventor_id = $inventory->id then assign the result into $deleteInventoryDetails variable */
             $deleteInventoryDetails = InventoryDetail::whereNotIn('hardware_id', $validatedInventoryDetails['hardware_id'])->where('inventory_id', $inventory->id)->get();
+            // if $deleteInventoryDetails result is true / available
             if($deleteInventoryDetails){
+                // loop every element in $deleteInventoryDetails array
                 foreach($deleteInventoryDetails as $deleteInventoryDetail) {
                     $stock = ItemStock::where('hardware_id', $deleteInventoryDetail->hardware_id)->first();
                     if($stock) {
-                        $updateStock['stock'] = $stock->stock + $deleteInventoryDetail->quantity;
-                        ItemStock::where('hardware_id', $updateStock['hardware_id'])->update($updateStock);
+                        $updateStock['hardware_id'] = $deleteInventoryDetail->hardware_id;
+                        $updateStock['stock'] = $stock->stock - $deleteInventoryDetail->quantity;
+                        ItemStock::where('hardware_id', $stock->hardware_id)->update($updateStock);
                     }
-                    InventoryDetail::where('hardware_id', $deleteInventoryDetail->hardware_id)->delete();
+                    InventoryDetail::where('hardware_id', $deleteInventoryDetail->hardware_id)->where('inventory_id', $inventory->id)->delete();
                 }
             }
         }
