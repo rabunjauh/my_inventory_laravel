@@ -145,31 +145,80 @@ let table = new DataTable('#hardwares', {
     },
     {
       data: 'status',
-      name: 'status'
+      name: 'status',
+      render: function(data, type, full, meta) {
+        if(data === 1) {
+          return 'Active';
+        } else {
+          return 'Not Active';
+        }
+      }
     },
     {
       data: 'hardware_type.name',
-      name: 'hardware_type.name'
+      name: 'hardware_type.name',
+      render: function(data, type, full, meta) {
+        if(data) {
+          return data;
+        } else {
+          return ''
+        }
+      }
     },
     {
       data: 'hardware_model.name',
-      name: 'hardware_model.name'
+      name: 'hardware_model.name',
+      render: function(data, type, full, meta) {
+        if(data) {
+          return data;
+        } else {
+          return ''
+        }
+      }
     },
     {
       data: 'processor.model_no',
-      name: 'processor.model_no'
+      name: 'processor.model_no',
+      render: function(data, type, full, meta) {
+        if(data) {
+          return data;
+        } else {
+          return ''
+        }
+      }
     },
     {
       data: 'memory.capacity',
-      name: 'memory.capacity'
+      name: 'memory.capacity',
+      render: function(data, type, full, meta) {
+        if(data) {
+          return data;
+        } else {
+          return ''
+        }
+      }
     },
     {
       data: 'graphic_card.capacity',
-      name: 'graphic_card.capacity'
+      name: 'graphic_card.capacity',
+      render: function(data, type, full, meta) {
+        if(data) {
+          return data;
+        } else {
+          return ''
+        }
+      }
     },
     {
       data: 'storage.capacity',
-      name: 'storage.capacity'
+      name: 'storage.capacity',
+      render: function(data, type, full, meta) {
+        if(data) {
+          return data;
+        } else {
+          return ''
+        }
+      }
     },
     // {
     //   data: 'warranty_start',
