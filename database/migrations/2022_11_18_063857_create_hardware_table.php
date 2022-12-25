@@ -30,10 +30,10 @@ return new class extends Migration
             $table->string('service_code')->nullable();
             $table->bigInteger('hardware_type_id');
             $table->bigInteger('hardware_model_id');
-            $table->bigInteger('processor_id')->default(0);
-            $table->bigInteger('memory_id')->default(0);
-            $table->bigInteger('graphic_card_id')->default(0);
-            $table->bigInteger('storage_id')->default(0);
+            $table->bigInteger('processor_id')->nullable();
+            $table->bigInteger('memory_id')->nullable();
+            $table->bigInteger('graphic_card_id')->nullable();
+            $table->bigInteger('storage_id')->nullable();
             $table->string('computer_name')->nullable();
             $table->timestamps();
         });

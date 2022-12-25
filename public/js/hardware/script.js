@@ -35,7 +35,14 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     {
       data: 'status',
-      name: 'status'
+      name: 'status',
+      render: function(data, type, full, meta) {
+        if(data === 1) {
+          return 'Aktive';
+        } else {
+          return 'Not Active';
+        }
+      }
     },
     {
       data: 'hardware_type.name',

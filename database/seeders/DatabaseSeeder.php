@@ -197,6 +197,54 @@ class DatabaseSeeder extends Seeder
             "storage_id" => 1,
             "computer_name" => "jlk;dfakjds"
         ]);
+        
+        // 7
+        Hardware::create([
+            "code" => "7",
+            "hardware_category_id" => 2,
+            "name" => "Monitor Dell H2220",
+            "manufacturer_id" => 3,
+            "serial_number" => "dfsa5343",
+            "status" => 1,
+            // "warranty_start" => "",
+            // "warranty_end" => "",
+            "description" => "",
+            "image_name" => "image",
+            "image_format" => "jpg",
+            "remark" => "",
+            // "service_code" => "",
+            "hardware_type_id" => 3,
+            "hardware_model_id" => 6,
+            // "processor_id" => 0,
+            // "memory_id" => 0,
+            // "graphic_card_id" => 0,
+            // "storage_id" => 0,
+            // "computer_name" => "jlk;dfakjds"
+        ]);
+        
+        // 8
+        Hardware::create([
+            "code" => "8",
+            "hardware_category_id" => 2,
+            "name" => "Keyboard Logitech K120",
+            "manufacturer_id" => 5,
+            "serial_number" => "N/A",
+            "status" => 1,
+            // "warranty_start" => "",
+            // "warranty_end" => "",
+            "description" => "",
+            "image_name" => "image",
+            "image_format" => "jpg",
+            "remark" => "",
+            // "service_code" => "",
+            "hardware_type_id" => 4,
+            "hardware_model_id" => 6,
+            // "processor_id" => 0,
+            // "memory_id" => 0,
+            // "graphic_card_id" => 0,
+            // "storage_id" => 0,
+            // "computer_name" => "jlk;dfakjds"
+        ]);
 
         // 1
         Storage::create([
@@ -229,6 +277,11 @@ class DatabaseSeeder extends Seeder
         // 4
         Manufacturer::create([
             "name" => "Intel"
+        ]);
+        
+        // 5
+        Manufacturer::create([
+            "name" => "Logitech"
         ]);
         // 1
         GraphicCard::create([
@@ -275,6 +328,11 @@ class DatabaseSeeder extends Seeder
         HardwareModel::create([
             "name" => "H2220",
             "manufacturer_id" => 2,            
+        ]);
+        // 7
+        HardwareModel::create([
+            "name" => "K120",
+            "manufacturer_id" => 5,            
         ]);
         // 1
         HardwareType::create([
