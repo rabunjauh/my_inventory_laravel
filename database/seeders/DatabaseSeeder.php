@@ -403,5 +403,14 @@ class DatabaseSeeder extends Seeder
         Position::create([
             "name" => "Position C"
         ]);
+
+        Employee::create([
+            "employee_id" => "0001",
+            "name" => "Employee A",
+            "department_id" => 1,
+            "position_id" => 1,
+            "isHod" => 1,
+            "join_date" => "2022-12-26"
+        ]);
     }
 }
