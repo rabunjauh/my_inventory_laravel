@@ -230,12 +230,18 @@ class InventoryController extends Controller
             if($deleteInventoryDetails){
                 // loop every element in $deleteInventoryDetails array
                 foreach($deleteInventoryDetails as $deleteInventoryDetail) {
+                    // get single row from item_stocks table where hardware_id = hardware_id from input form then assign result into $stock variable
                     $stock = ItemStock::where('hardware_id', $deleteInventoryDetail->hardware_id)->first();
+                    // if $stock result is true / available
                     if($stock) {
+                        // Assign hardware_id from input form n to $updateStock array
                         $updateStock['hardware_id'] = $deleteInventoryDetail->hardware_id;
+                        // Subtract existing stock in item_stocks table with deleted data from input form n
                         $updateStock['stock'] = $stock->stock - $deleteInventoryDetail->quantity;
+                        // Update item_stocks table where hardware_id = deleted hardware_id with data inside $updateStock array
                         ItemStock::where('hardware_id', $stock->hardware_id)->update($updateStock);
                     }
+                    // Delete from inventory_details where hardware_id = deleted item from input form n
                     InventoryDetail::where('hardware_id', $deleteInventoryDetail->hardware_id)->where('inventory_id', $inventory->id)->delete();
                 }
             }
@@ -250,10 +256,29 @@ class InventoryController extends Controller
      */
     public function destroy(Inventory $inventory)
     {
+        // Delete from inventories where inventory_id = $inventory->id and assign result into $deleted variable
         $deleted = Inventory::destroy($inventory->id);
+        // If delete result is true / success
         if($deleted) {
-            InventoryDetail::where('inventory_id', $inventory->id)->delete();
+            // Get inventory_details where inventory_id = $inventory->id and assign into $inventoryDetails variable
+            $inventoryDetails = InventoryDetail::where('inventory_id', $inventory->id)->get();
+            // Loop every element inside $inventoryDetails array
+            foreach($inventoryDetails as $inventoryDetail) {
+                // Get single row from item_stocks table where hardware_id = inventory_detail->hardware_id
+                $stock = ItemStock::where('hardware_id', $inventoryDetail->hardware_id)->first();
+                // if $stock result is true / available
+                if($stock) {
+                    // Assign hardware_id from input form n to $updateStock array
+                    $updateStock['hardware_id'] = $inventoryDetail->hardware_id;
+                    // Subtract existing stock in item_stocks table with deleted data from input form n
+                    $updateStock['stock'] = $stock->stock - $inventoryDetail->quantity;
+                    // Update item_stocks table where hardware_id = deleted hardware_id with data inside $updateStock array
+                    ItemStock::where('hardware_id', $stock->hardware_id)->update($updateStock);
+                }
+            }
         }
+        // Delete all from inventory_details where inventory_id = $inventory->id
+        InventoryDetail::where('inventory_id', $inventory->id)->delete();
         return redirect('/inventory')->with('success', 'Inventory data successfully deleted');
     }
 
