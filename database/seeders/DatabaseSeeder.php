@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use Illuminate\Database\Seeder;
+use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Inventory;
 use App\Models\InventoryDetail;
@@ -16,6 +17,7 @@ use App\Models\HardwareType;
 use App\Models\itemStock;
 use App\Models\Manufacturer;
 use App\Models\Memory;
+use App\Models\Position;
 use App\Models\Processor;
 use App\Models\Storage;
 use App\Models\Supplier;
@@ -367,15 +369,39 @@ class DatabaseSeeder extends Seeder
             "frequency" => "2.70 GHz",
             "memory_support" => "DDR4-2933"
         ]);
-
+        // 1
         itemStock::create([
             "hardware_id"  => 1,
             "stock" => 1
         ]);
-        
+        // 2
         itemStock::create([
             "hardware_id"  => 2,
             "stock" => 1
+        ]);
+        // 1
+        Department::create([
+            "name" => "Department A"
+        ]);
+        // 2
+        Department::create([
+            "name" => "Department B"
+        ]);
+        // 3
+        Department::create([
+            "name" => "Department C"
+        ]);
+        // 1
+        Position::create([
+            "name" => "Position A"
+        ]);
+        // 2
+        Position::create([
+            "name" => "Position B"
+        ]);
+        // 3
+        Position::create([
+            "name" => "Position C"
         ]);
     }
 }
