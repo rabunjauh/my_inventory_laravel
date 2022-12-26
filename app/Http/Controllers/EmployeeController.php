@@ -14,7 +14,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        return view('employee/index', [
+            'title' => 'Employee',
+            'employees' => Employee::with(['department', 'position'])->paginate()
+        ]);
     }
 
     /**

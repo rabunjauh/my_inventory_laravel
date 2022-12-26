@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GraphicCardController;
 use App\Http\Controllers\HardwareCategoryController;
 use App\Http\Controllers\HardwareController;
@@ -32,10 +33,10 @@ use App\Models\itemStock;
 */
 
 Route::resource('/department', DepartmentController::class);
+Route::resource('/employee', EmployeeController::class);
 Route::resource('/graphicCard', GraphicCardController::class);
 Route::resource('/hardwareCategory', HardwareCategoryController::class);
 Route::get('/hardware/json', [HardwareController::class, 'hardware_ajax'])->name('hardware_ajax');
-Route::get('/itemStock/json', [itemStockController::class, 'itemStockAjax']);
 Route::resource('/', HardwareController::class);
 Route::get('/hardware/hardware_ajax_select', [HardwareController::class, 'hardware_ajax_select'])->name('hardware_ajax_select');
 Route::get('/hardware/hardware_by_id/{id}', [HardwareController::class, 'hardware_by_id'])->name('hardware_by_id');
@@ -46,6 +47,7 @@ Route::get('/inventory/inventoryDetailJsonByHardwareId/{id}', [InventoryControll
 Route::get('/inventory/json', [InventoryController::class, 'inventory_ajax'])->name('inventory_ajax');
 // Route::get('/inventory/inventoryDetailJson', [InventoryController::class, 'inventoryDetailAjax'])->name('inventoryDetailAjax');
 Route::resource('/inventory', InventoryController::class);
+Route::get('/itemStock/json', [itemStockController::class, 'itemStockAjax']);
 Route::resource('/itemStock', itemStockController::class);
 Route::resource('/manufacturer', ManufacturerController::class);
 Route::resource('/memory', MemoryController::class);

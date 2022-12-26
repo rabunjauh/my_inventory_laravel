@@ -1,4 +1,3 @@
-{{-- @dd($assigns) --}}
 @extends('layouts.main')
 
 @section('container')
