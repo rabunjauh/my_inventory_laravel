@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('employee_id')->unique();
             $table->string('name');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->bigInteger('department_id');
             $table->bigInteger('position_id');
             $table->bigInteger('user_id');
