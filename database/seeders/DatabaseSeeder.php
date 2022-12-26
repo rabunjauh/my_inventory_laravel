@@ -393,15 +393,18 @@ class DatabaseSeeder extends Seeder
         ]);
         // 1
         Position::create([
-            "name" => "Position A"
+            "name" => "Dep A Position A",
+            "department_id" => 1
         ]);
         // 2
         Position::create([
-            "name" => "Position B"
+            "name" => " Dep A Position B",
+            "department_id" => 1
         ]);
         // 3
         Position::create([
-            "name" => "Position C"
+            "name" => "Dep A Position C",
+            "department_id" => 1
         ]);
 
         Employee::create([
