@@ -26,12 +26,21 @@
             <option value="{{ $department->id }}" {{ old('department_id') == $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
           @endforeach
         </select>
+        @error('department_id')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
       </div>
       
       <div class="mb-3">
-        <label for="capacity" class="form-label">Capacity</label>
-        <input type="text" class="form-control @error('capacity')is-invalid @enderror" id="capacity" name="capacity" value="{{ old('capacity') }}" placeholder="Capacity" required autofocus>
-        @error('capacity')
+        <label for="position_id" class="form-label">Position</label>
+        <select class="js-example-basic-single form-control @error('position_id')is-invalid @enderror" name="position_id">
+          @foreach($positions as $position)
+            <option value="{{ $position->id }}" {{ old('position_id') == $position->id ? 'selected' : '' }}>{{ $position->name }}</option>
+          @endforeach
+        </select>
+        @error('position_id')
         <div class="invalid-feedback">
           {{ $message }}
         </div>
@@ -39,28 +48,89 @@
       </div>
 
       <div class="mb-3">
-        <label for="model" class="form-label">Model</label>
-        <input type="text" class="form-control @error('model')is-invalid @enderror" id="model" name="model" value="{{ old('model') }}" placeholder="Model" required autofocus>
-        @error('model')
-        <div class="invalid-feedback">
-          {{ $message }}
-        </div>
-        @enderror
-      </div>
-
+        @if(old('status') == "1")
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="status" name="status" value="1" checked>
+            <label class="form-check-label" for="status">Active</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="status" name="status" value="0">
+            <label class="form-check-label" for="status">Not Active</label>
+          </div>
+          @error('status')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
+        @elseif(old('status') == "0")
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="status" name="status" value="1">
+            <label class="form-check-label" for="status">Active</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="status" name="status" value="0" checked>
+            <label class="form-check-label" for="status">Not Active</label>
+          </div>
+          @error('status')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
+        @else
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="status" name="status" value="1" checked>
+            <label class="form-check-label" for="status">Active</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="status" name="status" value="0">
+            <label class="form-check-label" for="status">Not Active</label>
+          </div>
+          @error('status')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+          @enderror
+        @endif
+      </div> 
       
-
+      
       <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <textarea class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
-      </div>
-      @error('description')
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="idHod"  name="isHod">
+          <label class="form-check-label" for="isHod">
+            is HOD
+          </label>
+        </div>
+        @error('isHod')
         <div class="invalid-feedback">
           {{ $message }}
         </div>
         @enderror
       </div>
 
+      <div class="mb-3">
+        <label for="hod_id" class="form-label">HOD</label>
+        <select class="js-example-basic-single form-control @error('hod_id')is-invalid @enderror" name="hod_id">
+          @foreach($hods as $hod)
+            <option value="{{ $hod->id }}" {{ old('hod_id') == $hod->id ? 'selected' : '' }}>{{ $hod->name }}</option>
+          @endforeach
+        </select>
+        @error('hod_id')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
+      </div>
+
+      <div class="mb-3">
+        <label for="join_date" class="form-label">Join Date</label>
+        <input type="text" class="form-control @error('join_date')is-invalid @enderror" id="join_date" name="join_date" value="{{ old('join_date') }}" placeholder="YYYY-MM-DD" required autofocus>
+        @error('join_date')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
+      </div>
   </div>
 
   <div class="row mt-3">
