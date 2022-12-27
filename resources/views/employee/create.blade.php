@@ -10,6 +10,16 @@
       <form action="/employee" method="post">
         @csrf
       <div class="mb-3">
+        <label for="type" class="form-label">Employee ID</label>
+        <input type="text" class="form-control @error('employee_id')is-invalid @enderror" id="employee_id" name="employee_id" value="{{ old('employee_id') }}" placeholder="Employee ID" required autofocus>
+        @error('employee_id')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
+      </div>
+
+      <div class="mb-3">
         <label for="type" class="form-label">Employee Name</label>
         <input type="text" class="form-control @error('name')is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="Employee Name" required autofocus>
         @error('name')
@@ -93,14 +103,18 @@
         @endif
       </div> 
       
-      
       <div class="mb-3">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="idHod"  name="isHod">
+        {{-- <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="1" id="isHod"  name="isHod">
           <label class="form-check-label" for="isHod">
             is HOD
           </label>
-        </div>
+        </div> --}}
+        <label for="isHod" class="form-label">Is HOD</label>
+        <select class="js-example-basic-single form-control @error('isHod')is-invalid @enderror" name="isHod">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
         @error('isHod')
         <div class="invalid-feedback">
           {{ $message }}
@@ -109,7 +123,7 @@
       </div>
 
       <div class="mb-3">
-        <label for="hod_id" class="form-label">HOD</label>
+        <label for="hod_id" class="form-label">HOD Name</label>
         <select class="js-example-basic-single form-control @error('hod_id')is-invalid @enderror" name="hod_id">
           @foreach($hods as $hod)
             <option value="{{ $hod->id }}" {{ old('hod_id') == $hod->id ? 'selected' : '' }}>{{ $hod->name }}</option>
@@ -124,7 +138,7 @@
 
       <div class="mb-3">
         <label for="join_date" class="form-label">Join Date</label>
-        <input type="text" class="form-control @error('join_date')is-invalid @enderror" id="join_date" name="join_date" value="{{ old('join_date') }}" placeholder="YYYY-MM-DD" required autofocus>
+        <input type="text" class="form-control @error('join_date')is-invalid @enderror" id="join_date" name="join_date" value="{{ old('join_date') }}" placeholder="YYYY-MM-DD" required>
         @error('join_date')
         <div class="invalid-feedback">
           {{ $message }}

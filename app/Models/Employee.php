@@ -18,4 +18,12 @@ class Employee extends Model
     public function position() {
         return $this->belongsTo(Position::class);
     }
+
+    public function hod() {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function department_member() {
+        return $this->hasMany(Employee::class);
+    }
 }

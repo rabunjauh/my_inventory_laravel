@@ -1,3 +1,4 @@
+{{-- @dd($employees[2]->department); --}}
 @extends('layouts.main')
 
 @section('container')
@@ -48,7 +49,11 @@
                       <td>{{ $employee->position->name }}</td>
                       <td>{{ ($employee->status === 1) ? 'Active' : 'Not Active' }}</td>
                       <td>{{ ($employee->isHod === 1) ? 'Yes' : 'No' }}</td>
-                      <td>{{ $employee->hod }}</td>
+                      @if($employee->hod)
+                      <td>{{ $employee->hod->name }}</td>
+                      @else
+                      <td>{{ '' }}</td>
+                      @endif
                       <td>{{ $employee->join_date }}</td>
                       <td>
                         <a href="/employee/{{ $employee->id }}/edit" class="badge bg-warning text-decoration-none">Edit</i></a>  

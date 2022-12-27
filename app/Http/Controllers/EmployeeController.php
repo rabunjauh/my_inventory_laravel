@@ -18,7 +18,7 @@ class EmployeeController extends Controller
     {
         return view('employee/index', [
             'title' => 'Employee',
-            'employees' => Employee::with(['department', 'position'])->paginate()
+            'employees' => Employee::with(['department', 'position', 'hod'])->paginate()
         ]);
     }
 
@@ -45,7 +45,22 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $validatedData = $request->validate([
+            'employee_id' => 'numeric|unique:employees',
+            'name' => 'required|max:255',
+            'status' => 'required',
+            'department_id' => 'required',
+            'position_id' => 'required',
+            'isHod' => 'required',
+            'hod_id' => 'required',
+            'join_date' => 'required|date'
+        ]);
+
+        // $validatedData['name'] = ucwords($validatedData['name']);
+        // dd($validatedData);
+        Employee::create($validatedData);
+        return redirect('/employee')->with('success', 'Employee data successfully added');
     }
 
     /**

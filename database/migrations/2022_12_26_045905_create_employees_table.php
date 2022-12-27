@@ -20,7 +20,7 @@ return new class extends Migration
             $table->tinyInteger('status')->default(1);
             $table->bigInteger('department_id');
             $table->bigInteger('position_id');
-            $table->bigInteger('user_id')->default(0);
+            // $table->bigInteger('user_id')->default(0);
             $table->tinyInteger('isHod')->default(0);
             $table->bigInteger('hod_id')->nullable();
             $table->date('join_date');
