@@ -132,7 +132,8 @@
         <label for="hod_id" class="form-label">HOD Name</label>
         <select id="hod_id" class="form-control @error('hod_id')is-invalid @enderror" name="hod_id">
           @foreach($hods as $hod)
-            <option value="">No HOD</option>
+            <option value=""></option>
+            <option value="null">No HOD</option>
             <option value="{{ $hod->id }}" {{ old('hod_id') == $hod->id ? 'selected' : '' }}>{{ $hod->name }}</option>
           @endforeach
         </select>
