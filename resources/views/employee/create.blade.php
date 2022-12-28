@@ -31,8 +31,9 @@
 
       <div class="mb-3">
         <label for="department_id" class="form-label">Department</label>
-        <select class="js-example-basic-single form-control @error('department_id')is-invalid @enderror" name="department_id">
+        <select id="department_id" class="form-control @error('department_id')is-invalid @enderror" name="department_id">
           @foreach($departments as $department)
+            <option value=""></option>
             <option value="{{ $department->id }}" {{ old('department_id') == $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
           @endforeach
         </select>
@@ -45,8 +46,9 @@
       
       <div class="mb-3">
         <label for="position_id" class="form-label">Position</label>
-        <select class="js-example-basic-single form-control @error('position_id')is-invalid @enderror" name="position_id">
+        <select id="position_id" class="form-control @error('position_id')is-invalid @enderror" name="position_id">
           @foreach($positions as $position)
+            <option value=""></option>
             <option value="{{ $position->id }}" {{ old('position_id') == $position->id ? 'selected' : '' }}>{{ $position->name }}</option>
           @endforeach
         </select>
