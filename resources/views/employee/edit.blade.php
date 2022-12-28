@@ -7,11 +7,12 @@
   </div>
   <div class="row">
     <div class="col-md-5">
-      <form action="/employee" method="post">
+      <form action="/employee/{{ $employee->id }}" method="post">
+        @method('put')
         @csrf
       <div class="mb-3">
         <label for="type" class="form-label">Employee ID</label>
-        <input type="text" class="form-control @error('employee_id')is-invalid @enderror" id="employee_id" name="employee_id" value="{{ old('employee_id') }}" placeholder="Employee ID" required autofocus>
+        <input type="text" class="form-control @error('employee_id')is-invalid @enderror" id="employee_id" name="employee_id" value="{{ old('employee_id', $employee->employee_id) }}" placeholder="Employee ID" required autofocus>
         @error('employee_id')
         <div class="invalid-feedback">
           {{ $message }}
@@ -21,7 +22,7 @@
 
       <div class="mb-3">
         <label for="type" class="form-label">Employee Name</label>
-        <input type="text" class="form-control @error('name')is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="Employee Name" required autofocus>
+        <input type="text" class="form-control @error('name')is-invalid @enderror" id="name" name="name" value="{{ old('name', $employee->name) }}" placeholder="Employee Name" required autofocus>
         @error('name')
         <div class="invalid-feedback">
           {{ $message }}
@@ -33,7 +34,7 @@
         <label for="department_id" class="form-label">Department</label>
         <select class="js-example-basic-single form-control @error('department_id')is-invalid @enderror" name="department_id">
           @foreach($departments as $department)
-            <option value="{{ $department->id }}" {{ old('department_id') == $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
+            <option value="{{ $department->id }}" {{ old('department_id', $employee->department_id) == $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
           @endforeach
         </select>
         @error('department_id')
@@ -47,7 +48,7 @@
         <label for="position_id" class="form-label">Position</label>
         <select class="js-example-basic-single form-control @error('position_id')is-invalid @enderror" name="position_id">
           @foreach($positions as $position)
-            <option value="{{ $position->id }}" {{ old('position_id') == $position->id ? 'selected' : '' }}>{{ $position->name }}</option>
+            <option value="{{ $position->id }}" {{ old('position_id', $position->id) == $employee->position_id ? 'selected' : '' }}>{{ $position->name }}</option>
           @endforeach
         </select>
         @error('position_id')
@@ -59,7 +60,7 @@
 
       <div class="mb-3">
         <label for="status" class="form-label">Status</label>
-        @if(old('status') == "1")
+        @if(old('status', $employee->status) == "1")
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" id="status" name="status" value="1" checked>
             <label class="form-check-label" for="status">Active</label>
@@ -73,7 +74,7 @@
               {{ $message }}
             </div>
           @enderror
-        @elseif(old('status') == "0")
+        @elseif(old('status', $employee->status) == "0")
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" id="status" name="status" value="1">
             <label class="form-check-label" for="status">Active</label>
@@ -113,13 +114,13 @@
         </div> --}}
         <label for="isHod" class="form-label">Is HOD</label>
         <select class="js-example-basic-single form-control @error('isHod')is-invalid @enderror" name="isHod">
-          @if(old('isHod') == 0)
-            <option value="0" selected>No</option>
-            <option value="1">Yes</option>
-            @else
-            <option value="0">No</option>
-            <option value="1" selected>Yes</option>
-          @endif
+          @if(old('isHod', $employee->isHod) == 0)
+          <option value="0" selected>No</option>
+          <option value="1">Yes</option>
+          @else
+          <option value="0">No</option>
+          <option value="1" selected>Yes</option>
+        @endif
         </select>
         @error('isHod')
         <div class="invalid-feedback">
@@ -130,10 +131,9 @@
 
       <div class="mb-3">
         <label for="hod_id" class="form-label">HOD Name</label>
-        <select id="hod_id" class="form-control @error('hod_id')is-invalid @enderror" name="hod_id">
+        <select class="js-example-basic-single form-control @error('hod_id')is-invalid @enderror" name="hod_id">
           @foreach($hods as $hod)
-            <option value="">No HOD</option>
-            <option value="{{ $hod->id }}" {{ old('hod_id') == $hod->id ? 'selected' : '' }}>{{ $hod->name }}</option>
+            <option value="{{ $hod->id }}" {{ old('hod_id') == $employee->hod_id ? 'selected' : '' }}>{{ $hod->name }}</option>
           @endforeach
         </select>
         @error('hod_id')
@@ -145,7 +145,7 @@
 
       <div class="mb-3">
         <label for="join_date" class="form-label">Join Date</label>
-        <input type="text" class="form-control @error('join_date')is-invalid @enderror" id="join_date" name="join_date" value="{{ old('join_date') }}" placeholder="YYYY-MM-DD" required>
+        <input type="text" class="form-control @error('join_date')is-invalid @enderror" id="join_date" name="join_date" value="{{ old('join_date', $employee->join_date) }}" placeholder="YYYY-MM-DD" required>
         @error('join_date')
         <div class="invalid-feedback">
           {{ $message }}

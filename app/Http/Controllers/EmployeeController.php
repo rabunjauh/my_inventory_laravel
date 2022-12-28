@@ -82,7 +82,13 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return view('employee/edit', [
+            'title' => 'Edit Employee',
+            'departments' => Department::all(),
+            'positions' => Position::all(),
+            'hods' => Employee::where('isHod', 1)->get(),
+            'employee' => $employee
+        ]);
     }
 
     /**

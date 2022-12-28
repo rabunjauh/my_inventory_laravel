@@ -381,30 +381,45 @@ class DatabaseSeeder extends Seeder
         ]);
         // 1
         Department::create([
-            "name" => "Department A"
+            "name" => "HR"
         ]);
         // 2
         Department::create([
-            "name" => "Department B"
+            "name" => "Finance"
         ]);
         // 3
         Department::create([
-            "name" => "Department C"
+            "name" => "IT"
         ]);
         // 1
         Position::create([
-            "name" => "Dep A Position A",
+            "name" => "HR Manager",
             "department_id" => 1
         ]);
         // 2
         Position::create([
-            "name" => " Dep A Position B",
-            "department_id" => 1
+            "name" => "Finance Manager",
+            "department_id" => 2
         ]);
         // 3
         Position::create([
-            "name" => "Dep A Position C",
+            "name" => "IT Manager",
+            "department_id" => 3
+        ]);
+        // 4
+        Position::create([
+            "name" => "HR Officer",
             "department_id" => 1
+        ]);
+        // 5
+        Position::create([
+            "name" => "Finance Assistant",
+            "department_id" => 2
+        ]);
+        // 6
+        Position::create([
+            "name" => "IT Support",
+            "department_id" => 3
         ]);
 
         Employee::create([
