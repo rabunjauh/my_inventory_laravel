@@ -17,7 +17,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SoftwareCategoryController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\SupplierController;
-use App\Models\itemStock;
+use App\Http\Controllers\UserController;
 
 // use App\Models\Hardware;
 
@@ -56,3 +56,4 @@ Route::resource('/project', ProjectController::class);
 Route::resource('/softwareCategory', SoftwareCategoryController::class);
 Route::resource('/storage', storageController::class);
 Route::resource('/supplier', SupplierController::class);
+Route::resource('/user', UserController::class);

@@ -79,6 +79,6 @@
 @endsection
 
 @push('script')
-  <script src="{{ URL::asset('js/graphicCard/script.js') }}"></script>
+  <script src="{{ URL::asset('js/storage/script.js') }}"></script>
   <script src="{{ URL::asset('js/global/script.js') }}"></script>
 @endpush

@@ -32,7 +32,7 @@
 
       <div class="mb-3">
         <label for="department_id" class="form-label">Department</label>
-        <select class="js-example-basic-single form-control @error('department_id')is-invalid @enderror" name="department_id">
+        <select id="department_id" class="js-example-basic-single form-control @error('department_id')is-invalid @enderror" name="department_id">
           @foreach($departments as $department)
             <option value="{{ $department->id }}" {{ old('department_id', $employee->department_id) == $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
           @endforeach
@@ -46,9 +46,9 @@
       
       <div class="mb-3">
         <label for="position_id" class="form-label">Position</label>
-        <select class="js-example-basic-single form-control @error('position_id')is-invalid @enderror" name="position_id">
+        <select id="postition_id" class="js-example-basic-single form-control @error('position_id')is-invalid @enderror" name="position_id">
           @foreach($positions as $position)
-            <option value="{{ $position->id }}" {{ old('position_id', $position->id) == $employee->position_id ? 'selected' : '' }}>{{ $position->name }}</option>
+            <option value="{{ $position->id }}" {{ old('position_id', $employee->position_id) == $position->id ? 'selected' : '' }}>{{ $position->name }}</option>
           @endforeach
         </select>
         @error('position_id')
@@ -113,7 +113,7 @@
           </label>
         </div> --}}
         <label for="isHod" class="form-label">Is HOD</label>
-        <select class="js-example-basic-single form-control @error('isHod')is-invalid @enderror" name="isHod">
+        <select id="isHod" class="js-example-basic-single form-control @error('isHod')is-invalid @enderror" name="isHod">
           @if(old('isHod', $employee->isHod) == 0)
           <option value="0" selected>No</option>
           <option value="1">Yes</option>
@@ -131,9 +131,10 @@
 
       <div class="mb-3">
         <label for="hod_id" class="form-label">HOD Name</label>
-        <select class="js-example-basic-single form-control @error('hod_id')is-invalid @enderror" name="hod_id">
+        <select id="hod_id" class="js-example-basic-single form-control @error('hod_id')is-invalid @enderror" name="hod_id">
+          <option value="0">No HOD</option>
           @foreach($hods as $hod)
-            <option value="{{ $hod->id }}" {{ old('hod_id') == $employee->hod_id ? 'selected' : '' }}>{{ $hod->name }}</option>
+            <option value="{{ $hod->id }}" {{ old('hod_id', $employee->hod_id) == $employee->hod_id ? 'selected' : '' }}>{{ $hod->name }}</option>
           @endforeach
         </select>
         @error('hod_id')
@@ -166,6 +167,5 @@
 @endsection
 
 @push('script')
-  <script src="{{ URL::asset('js/employee/script.js') }}"></script>
   <script src="{{ URL::asset('js/global/script.js') }}"></script>
 @endpush

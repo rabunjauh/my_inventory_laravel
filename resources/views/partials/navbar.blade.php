@@ -15,7 +15,7 @@
         {{-- @auth --}}
           <a class="nav-link {{ Request::is('assign') ? 'active' : '' }}" href="/assign">Employee Extension</a>
           <a class="nav-link {{ Request::is('extension') ? 'active' : '' }}" href="/extension">Extension</a>
-          <a class="nav-link {{ Request::is('employee') ? 'active' : '' }}" href="/employee">Employee</a>
+          <a class="nav-link {{ Request::is('user') ? 'active' : '' }}" href="/user">User</a>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Master Data Employee

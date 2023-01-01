@@ -26,4 +26,8 @@ class Employee extends Model
     public function department_member() {
         return $this->hasMany(Employee::class);
     }
+
+    public function user() {
+        return $this->hasMany(User::class);
+    }
 }

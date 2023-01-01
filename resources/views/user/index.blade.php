@@ -6,7 +6,7 @@
         @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           {{ session('success') }}
-          <button processor="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
       </div>
@@ -17,38 +17,32 @@
 
         <div class="row mb-2">
         <div class="col-lg-5">
-          <a href="/processor/create" class="btn btn-primary">
-            Add Processor</a>
+          <a href="/user/create" class="btn btn-primary">
+            Add User</a>
           </div>
         </div>
         
         <div class="row">
           <div class="col-lg-12">
-            <table class="table table-bordered table-striped" id="processors">
+            <table class="table table-bordered table-striped" id="users">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Model No</th>
-                  <th>Manufacturer</th>
-                  <th>Core</th>
-                  <th>Frequency</th>
-                  <th>Memory Support</th>
+                  <th>Username / Email</th>
+                  <th>Type</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                @if ($processors->count())
-                  @foreach ($processors as $processor)
+                @if ($users->count())
+                  @foreach ($users as $user)
                     <tr>
                       <td>{{ $loop->iteration }}</td>
-                      <td>{{ $processor->model_no }}</td>
-                      <td>{{ $processor->manufacturer->name }}</td>
-                      <td>{{ $processor->core }}</td>
-                      <td>{{ $processor->frequency }}</td>
-                      <td>{{ $processor->memory_support }}</td>
+                      <td>{{ $user->email }}</td>
+                      <td>{{ $user->isAdmin }}</td>
                       <td>
-                        <a href="/processor/{{ $processor->id }}/edit" class="badge bg-warning text-decoration-none">Edit</i></a>  
-                        <form action="/processor/{{ $processor->id }}" method="post" class="d-inline">
+                        <a href="/user/{{ $user->id }}/edit" class="badge bg-warning text-decoration-none">Edit</i></a>  
+                        <form action="/user/{{ $user->id }}" method="post" class="d-inline">
                           @method('delete')
                           @csrf
                           <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')">Delete</button>
@@ -65,5 +59,5 @@
 @endsection
 
 @push('script')
-  <script src="{{ URL::asset('js/processor/script.js') }}"></script>
+  <script src="{{ URL::asset('js/user/script.js') }}"></script>
 @endpush

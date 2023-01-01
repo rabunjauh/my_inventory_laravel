@@ -57,8 +57,7 @@ class EmployeeController extends Controller
             'join_date' => 'required|date'
         ]);
 
-        // $validatedData['name'] = ucwords($validatedData['name']);
-        // dd($validatedData);
+        $validatedData['name'] = ucwords($validatedData['name']);
         Employee::create($validatedData);
         return redirect('/employee')->with('success', 'Employee data successfully added');
     }
@@ -100,7 +99,20 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        $validatedData = $request->validate([
+            'employee_id' => 'numeric',
+            'name' => 'required|max:255',
+            'status' => 'required',
+            'department_id' => 'required',
+            'position_id' => 'required',
+            'isHod' => 'required',
+            'hod_id' => 'required',
+            'join_date' => 'required|date'
+        ]);
+
+        $validatedData['name'] = ucwords($validatedData['name']);
+        Employee::where('id', $employee->id)->update($validatedData);
+        return redirect('/employee')->with('success', 'Employee data updated successfully');
     }
 
     /**
@@ -111,6 +123,7 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        Employee::destroy($employee->id);
+        return redirect('/employee')->with('success', 'Employee data successfully deleted');
     }
 }

@@ -32,8 +32,8 @@
       <div class="mb-3">
         <label for="department_id" class="form-label">Department</label>
         <select id="department_id" class="form-control @error('department_id')is-invalid @enderror" name="department_id">
+          <option value=""></option>
           @foreach($departments as $department)
-            <option value=""></option>
             <option value="{{ $department->id }}" {{ old('department_id') == $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
           @endforeach
         </select>
@@ -47,8 +47,8 @@
       <div class="mb-3">
         <label for="position_id" class="form-label">Position</label>
         <select id="position_id" class="form-control @error('position_id')is-invalid @enderror" name="position_id">
+          <option value=""></option>
           @foreach($positions as $position)
-            <option value=""></option>
             <option value="{{ $position->id }}" {{ old('position_id') == $position->id ? 'selected' : '' }}>{{ $position->name }}</option>
           @endforeach
         </select>
@@ -114,7 +114,8 @@
           </label>
         </div> --}}
         <label for="isHod" class="form-label">Is HOD</label>
-        <select class="js-example-basic-single form-control @error('isHod')is-invalid @enderror" name="isHod">
+        <select id="isHod" class="form-control @error('isHod')is-invalid @enderror" name="isHod">
+          <option value=""></option>
           @if(old('isHod') == 0)
             <option value="0" selected>No</option>
             <option value="1">Yes</option>
@@ -133,9 +134,9 @@
       <div class="mb-3">
         <label for="hod_id" class="form-label">HOD Name</label>
         <select id="hod_id" class="form-control @error('hod_id')is-invalid @enderror" name="hod_id">
+          <option value=""></option>
+          <option value="0">No HOD</option>
           @foreach($hods as $hod)
-            <option value=""></option>
-            <option value="null">No HOD</option>
             <option value="{{ $hod->id }}" {{ old('hod_id') == $hod->id ? 'selected' : '' }}>{{ $hod->name }}</option>
           @endforeach
         </select>
