@@ -36,6 +36,53 @@
       </div>
 
       <div class="mb-3">
+        <label for="isAdmin" class="form-label">User Type</label>
+        @if(old('isAdmin') == "1")
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="isAdmin" name="isAdmin" value="1" checked>
+            <label class="form-check-label" for="isAdmin">Admin</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="isAdmin" name="isAdmin" value="0">
+            <label class="form-check-label" for="isAdmin">Reguler User</label>
+          </div>
+          @error('isAdmin')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
+        @elseif(old('isAdmin') == "0")
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="isAdmin" name="isAdmin" value="1">
+            <label class="form-check-label" for="isAdmin">Admin</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="isAdmin" name="isAdmin" value="0" checked>
+            <label class="form-check-label" for="isAdmin">Reguler User</label>
+          </div>
+          @error('isAdmin')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+          @enderror
+        @else
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="isAdmin" name="isAdmin" value="1" checked>
+            <label class="form-check-label" for="isAdmin">Admin</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="isAdmin" name="isAdmin" value="0">
+            <label class="form-check-label" for="isAdmin">Reguler User</label>
+          </div>
+          @error('isAdmin')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+          @enderror
+        @endif
+      </div> 
+
+      <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control @error('password')is-invalid @enderror" id="password" name="password" value="{{ old('password') }}" placeholder="Minimum 6 character required" required>
       </div>
