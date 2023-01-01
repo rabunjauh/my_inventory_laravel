@@ -39,7 +39,7 @@
                     <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $user->email }}</td>
-                      <td>{{ $user->isAdmin }}</td>
+                      <td>{{ ($user->isAdmin == 1) ? "Admin" : "Reguler User"}}</td>
                       <td>
                         <a href="/user/{{ $user->id }}/edit" class="badge bg-warning text-decoration-none">Edit</i></a>  
                         <form action="/user/{{ $user->id }}" method="post" class="d-inline">
