@@ -46,6 +46,7 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'employee_id' => 'required|unique:users',
             'email' => 'email|required|unique:users',
+            'isAdmin' => 'required',
             'password' => 'required|confirmed|min:6',
         ]);
 
@@ -75,7 +76,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('user/edit', [
+            'title' => 'Edit User',
+            'employees' => Employee::all(),
+            'user' => $user
+        ]);
     }
 
     /**
