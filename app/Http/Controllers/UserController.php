@@ -44,8 +44,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'employee_id' => 'required|unique:user',
-            'email' => 'email|required',
+            'employee_id' => 'required|unique:users',
+            'email' => 'email|required|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
 
