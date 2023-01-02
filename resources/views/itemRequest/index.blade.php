@@ -19,7 +19,7 @@
         <div class="row mb-2">
         <div class="col-lg-5">
           <a href="/itemRequest/create" class="btn btn-primary">
-            Add itemRequest</a>
+            New Request</a>
           </div>
         </div>
         
@@ -29,14 +29,14 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>itemRequest Name</th>
+                  <th>Action</th>
+                  <th>Request No</th>
+                  <th>Request Date</th>
+                  <th>Employee Name</th>
                   <th>Department</th>
                   <th>Position</th>
-                  <th>Status</th>
-                  <th>is HOD</th>
-                  <th>HOD</th>
                   <th>Join Date</th>
-                  <th>Action</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
