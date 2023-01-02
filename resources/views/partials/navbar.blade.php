@@ -22,7 +22,7 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item {{ Request::is('employee') ? 'active' : '' }}" href="/employee">Employee</a></li>
               <li><a class="dropdown-item {{ Request::is('department') ? 'active' : '' }}" href="/department">Department</a></li>
-              <li><a class="dropdown-item {{ Request::is('hardwareModel') ? 'active' : '' }}" href="/hardwareModel">Hardware Model</a></li>
+              <li><a class="dropdown-item {{ Request::is('position') ? 'active' : '' }}" href="/position">Position</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
