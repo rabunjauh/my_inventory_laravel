@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Position;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,10 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        return view('position/create', [
+            'title' => 'Add Position',
+            'departments' => Department::all()
+        ]);
     }
 
     /**
