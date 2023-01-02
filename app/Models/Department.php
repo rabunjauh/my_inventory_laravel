@@ -22,4 +22,8 @@ class Department extends Model
     public function itemRequest() {
         return $this->hasManyThrough(ItemRequest::class, Employee::class);
     }
+
+    public function position() {
+        return $this->hasMany(Position::class);
+    }
 }
