@@ -14,6 +14,7 @@ use App\Http\Controllers\itemStockController;
 use App\Http\Controllers\MemoryController;
 use App\Http\Controllers\ProcessorController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RequestController;
 use App\Http\Controllers\SoftwareCategoryController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\SupplierController;
@@ -47,6 +48,7 @@ Route::get('/inventory/inventoryDetailJsonByHardwareId/{id}', [InventoryControll
 Route::get('/inventory/json', [InventoryController::class, 'inventory_ajax'])->name('inventory_ajax');
 // Route::get('/inventory/inventoryDetailJson', [InventoryController::class, 'inventoryDetailAjax'])->name('inventoryDetailAjax');
 Route::resource('/inventory', InventoryController::class);
+Route::resource('/itemRequest', ItemRequestController::class);
 Route::get('/itemStock/json', [itemStockController::class, 'itemStockAjax']);
 Route::resource('/itemStock', itemStockController::class);
 Route::resource('/manufacturer', ManufacturerController::class);
