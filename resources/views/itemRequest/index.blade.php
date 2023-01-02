@@ -1,4 +1,4 @@
-{{-- @dd($itemRequests[2]->department); --}}
+@dd($itemRequests);
 @extends('layouts.main')
 
 @section('container')
