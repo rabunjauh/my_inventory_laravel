@@ -16,7 +16,7 @@ class PositionController extends Controller
     {
         return view('position/index',[
             'title' => 'Position',
-            'positions' => Position::with(['department'])->paginate()
+            'positions' => Position::with(['department'])->orderBy('department_id', 'asc')->paginate()
         ]);
     }
 
