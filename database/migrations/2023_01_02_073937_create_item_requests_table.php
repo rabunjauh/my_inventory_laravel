@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('item_requests', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('item_request_code');
+            $table->bigInteger('employee_id');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

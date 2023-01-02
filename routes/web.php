@@ -14,7 +14,7 @@ use App\Http\Controllers\itemStockController;
 use App\Http\Controllers\MemoryController;
 use App\Http\Controllers\ProcessorController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\RequestController;
+use App\Http\Controllers\ItemRequestController;
 use App\Http\Controllers\SoftwareCategoryController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\SupplierController;

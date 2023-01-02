@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\ItemRequest;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,10 @@ class ItemRequestController extends Controller
      */
     public function index()
     {
-        //
+        return view('itemRequest/index', [
+            'title' => 'Request',
+            'employees' => Employee::all()
+        ]);
     }
 
     /**
