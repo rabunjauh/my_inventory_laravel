@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('item_request_code');
             $table->date('request_date');
             $table->bigInteger('employee_id');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

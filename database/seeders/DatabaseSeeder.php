@@ -14,6 +14,7 @@ use App\Models\Hardware;
 use App\Models\HardwareCategory;
 use App\Models\HardwareModel;
 use App\Models\HardwareType;
+use App\Models\ItemRequest;
 use App\Models\itemStock;
 use App\Models\Manufacturer;
 use App\Models\Memory;
@@ -429,6 +430,13 @@ class DatabaseSeeder extends Seeder
             "position_id" => 1,
             "isHod" => 1,
             "join_date" => "2022-12-26"
+        ]);
+
+        ItemRequest::create([
+            "item_request_code" => "1",
+            "employee_id" => "0001",
+            "request_date" => "2022-01-01",
+            "status" => 0
         ]);
     }
 }
