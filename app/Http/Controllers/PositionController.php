@@ -14,7 +14,10 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        return view('position/index',[
+            'title' => 'Position',
+            'positions' => Position::paginate()
+        ]);
     }
 
     /**
