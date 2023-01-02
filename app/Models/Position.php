@@ -15,6 +15,10 @@ class Position extends Model
         return $this->hasMany(Employee::class);
     }
 
+    public function department() {
+        return $this->belongsTo(Department::class);
+    }
+
     public function itemRequest() {
         return $this->hasManyThrough(ItemRequest::class, Employee::class);
     }
