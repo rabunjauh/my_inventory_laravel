@@ -92,7 +92,15 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validatedData = $request->validate([
+            'employee_id' => 'required|unique:users',
+            'email' => 'email|required|unique:users',
+            'isAdmin' => 'required',
+        ]);
+
+        $validatedData['email'] = strtolower($validatedData['email']);
+        User::where('id', $user->id)->update($validatedData);
+        return redirect('/user')->with('success', 'User data updated successfully');
     }
 
     /**
@@ -103,6 +111,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+        return redirect('/user')->with('success', 'User deleted successfully');
     }
 }

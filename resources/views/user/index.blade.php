@@ -42,6 +42,7 @@
                       <td>{{ ($user->isAdmin == 1) ? "Admin" : "Reguler User"}}</td>
                       <td>
                         <a href="/user/{{ $user->id }}/edit" class="badge bg-warning text-decoration-none">Edit</i></a>  
+                        <a href="/user/{{ $user->id }}/changePassword" class="badge bg-info text-decoration-none">Change Password</i></a>  
                         <form action="/user/{{ $user->id }}" method="post" class="d-inline">
                           @method('delete')
                           @csrf
