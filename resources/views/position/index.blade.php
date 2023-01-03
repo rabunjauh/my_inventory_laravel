@@ -41,7 +41,7 @@
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $position->name }}</td>
                       <td>{{ $position->department->name }}</td>
-                      <td>{{ ()$position->status == 1) ? 'Active' : 'Not Active' }}</td>
+                      <td>{{ ($position->status == 1) ? 'Active' : 'Not Active' }}</td>
                       <td>
                         <a href="/position/{{ $position->id }}/edit" class="badge bg-warning text-decoration-none">Edit</i></a>  
                         <form action="/position/{{ $position->id }}" method="post" class="d-inline">
