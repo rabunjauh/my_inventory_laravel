@@ -42,7 +42,16 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:positions',
+            'status' => 'required',
+            'department_id' => 'required'
+        ]);
+
+        $validatedData['name'] = strtoupper($validatedData['name']);
+        Position::create($validatedData);
+
+        return redirect('/position')->with('success', 'Position data successfully added');
     }
 
     /**
@@ -64,7 +73,7 @@ class PositionController extends Controller
      */
     public function edit(Position $position)
     {
-        //
+        
     }
 
     /**
@@ -76,7 +85,16 @@ class PositionController extends Controller
      */
     public function update(Request $request, Position $position)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:positions',
+            'status' => 'required',
+            'department_id' => 'required'
+        ]);
+
+        $validatedData['name'] = strtoupper($validatedData['name']);
+        Position::where('id', $position->id)->update($validatedData);
+
+        return redirect('/position')->with('success', 'Position data successfully updated');
     }
 
     /**
