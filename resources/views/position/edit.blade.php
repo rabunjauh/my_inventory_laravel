@@ -7,11 +7,12 @@
   </div>
   <div class="row">
     <div class="col-md-5">
-      <form action="/position" method="post">
+      <form action="/position/{{ $position->id }}" method="post">
+        @method('put')
         @csrf
       <div class="mb-3">
         <label for="name" class="form-label">Position Name</label>
-        <input type="text" class="form-control @error('name')is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="Position Name" required autofocus>
+        <input type="text" class="form-control @error('name')is-invalid @enderror" id="name" name="name" value="{{ old('name', $position->name) }}" placeholder="Position Name" required autofocus>
         @error('name')
         <div class="invalid-feedback">
           {{ $message }}
@@ -20,7 +21,7 @@
       </div>
 
       <div class="mb-3">
-        @if(old('status') == "1")
+        @if(old('status', $position->status) == 1)
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" id="status" name="status" value="1" checked>
             <label class="form-check-label" for="status">Active</label>
@@ -34,7 +35,7 @@
               {{ $message }}
             </div>
           @enderror
-        @elseif(old('status') == "0")
+        @elseif(old('status', $position->status) == 0)
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" id="status" name="status" value="1">
             <label class="form-check-label" for="status">Active</label>
@@ -69,7 +70,7 @@
         <label for="department_id" class="form-label">Department</label>
         <select class="js-example-basic-single form-control @error('department_id')is-invalid @enderror" name="department_id">
           @foreach($departments as $department)
-            <option value="{{ $department->id }}" {{ old('department_id') == $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
+            <option value="{{ $department->id }}" {{ old('department_id', $position->department_id) == $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
           @endforeach
         </select>
         @error('department_id')

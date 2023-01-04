@@ -73,7 +73,11 @@ class PositionController extends Controller
      */
     public function edit(Position $position)
     {
-        
+        return view('position/edit', [
+            'title' => 'Edit Position',
+            'departments' => Department::all(),
+            'position' => $position
+        ]);   
     }
 
     /**
@@ -85,12 +89,18 @@ class PositionController extends Controller
      */
     public function update(Request $request, Position $position)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|unique:positions',
+        $rules = [
             'status' => 'required',
             'department_id' => 'required'
-        ]);
+        ];
+        
+        if($request->name != $position->name) {
+            $rules['name'] = 'required|unique:positions';
+        } else {
+            $rules['name'] = 'required';
+        }
 
+        $validatedData = $request->validate($rules);
         $validatedData['name'] = strtoupper($validatedData['name']);
         Position::where('id', $position->id)->update($validatedData);
 
@@ -105,6 +115,7 @@ class PositionController extends Controller
      */
     public function destroy(Position $position)
     {
-        //
+        Position::destroy($position->id);
+        return redirect('/position')->with('success', 'Position data successfully deleted');
     }
 }
